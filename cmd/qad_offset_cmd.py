@@ -160,7 +160,7 @@ class QadOFFSETCommandClass(QadCommandClass):
 #       if added:      
 #          self.undoFeatureCacheIndexes.append(featureCacheLen)
 
-      forcedOffsetDist = None
+      offsetDistance = None
       if self.offset > 0:
          offsetDistance = self.offset                     
          if self.multi == True:
@@ -177,11 +177,11 @@ class QadOFFSETCommandClass(QadCommandClass):
             leftOf = dummy[5]         
                  
             if leftOf < 0: # a sinistra (per linea, arco o arco di ellisse) o interno (per cerchi, ellissi)            
-               forcedOffsetDist = self.offset + self.lastOffSetOnLeftSide
+               offsetDistance = self.offset + self.lastOffSetOnLeftSide
                self.lastOffSetOnLeftSide = offsetDistance
                self.getPointMapTool().lastOffSetOnLeftSide = self.lastOffSetOnLeftSide
             else: # alla destra
-               forcedOffsetDist = self.offset + self.lastOffSetOnRightSide         
+               offsetDistance = self.offset + self.lastOffSetOnRightSide         
                self.lastOffSetOnRightSide = offsetDistance            
                self.getPointMapTool().lastOffSetOnRightSide = self.lastOffSetOnRightSide
 
@@ -196,7 +196,7 @@ class QadOFFSETCommandClass(QadCommandClass):
       offsetQGSGeomList = offsetQGSGeom(qgsGeom, \
                                         newPt, \
                                         self.gapType, \
-                                        forcedOffsetDist)
+                                        offsetDistance)
 
       added = False
       for g in offsetQGSGeomList:
