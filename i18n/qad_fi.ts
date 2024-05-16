@@ -97,77 +97,77 @@
     <message>
         <location filename="../cmd/qad_arc_cmd.py" line="283"/>
         <location filename="../cmd/qad_arc_cmd.py" line="322"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="366"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="516"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="556"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="609"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="850"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="367"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="517"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="557"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="610"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="851"/>
         <source>Angle</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_arc_cmd.py" line="284"/>
         <location filename="../cmd/qad_arc_cmd.py" line="333"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="367"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="851"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="368"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="852"/>
         <source>chord Length</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_arc_cmd.py" line="286"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="368"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="853"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="369"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="854"/>
         <source>Specify the final point of the arc (hold Ctrl to switch direction) or [{0}]: </source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_arc_cmd.py" line="327"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="428"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="561"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="673"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="429"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="562"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="674"/>
         <source>Specify the included angle (hold Ctrl to switch direction): </source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_arc_cmd.py" line="338"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="483"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="484"/>
         <source>Specify the chord length (hold Ctrl to switch direction): </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="517"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="566"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="610"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="518"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="567"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="611"/>
         <source>Direction</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="518"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="576"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="611"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="519"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="577"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="612"/>
         <source>Radius</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="520"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="613"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="521"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="614"/>
         <source>Specify the center point of the arc (hold Ctrl to switch direction) or [{0}]: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="571"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="727"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="572"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="728"/>
         <source>Specify the tangent direction for the start point of the arc (hold Ctrl to switch direction): </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="581"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="783"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="582"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="784"/>
         <source>Specify the radius of the arc (hold Ctrl to switch direction): </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="818"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="819"/>
         <source>Specify the start point of the arc: </source>
         <translation></translation>
     </message>
@@ -650,35 +650,35 @@ The angle between can&apos;t be greater than {0}.</source>
     </message>
     <message>
         <location filename="../cmd/qad_circle_cmd.py" line="174"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="649"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="655"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="665"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="641"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="647"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="657"/>
         <source>Specify first tangent element of the circle: </source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_circle_cmd.py" line="184"/>
         <location filename="../cmd/qad_circle_cmd.py" line="222"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="261"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="258"/>
         <source>Diameter</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_circle_cmd.py" line="185"/>
         <location filename="../cmd/qad_circle_cmd.py" line="233"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="262"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="259"/>
         <source>Area</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_circle_cmd.py" line="186"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="263"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="260"/>
         <source>Specify the circle radius or [{0}]: </source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_circle_cmd.py" line="227"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="315"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="309"/>
         <source>Specify the circle diameter: </source>
         <translation></translation>
     </message>
@@ -688,53 +688,53 @@ The angle between can&apos;t be greater than {0}.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_circle_cmd.py" line="374"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="368"/>
         <source>Specify second point on the circle: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_circle_cmd.py" line="429"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="522"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="423"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="515"/>
         <source>Specify the third point on the circle: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_circle_cmd.py" line="564"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="626"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="557"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="618"/>
         <source>Specify second end of the circle diameter: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_circle_cmd.py" line="663"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="715"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="655"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="707"/>
         <source>
 Select a circle, an arc or a line.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_circle_cmd.py" line="679"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="701"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="707"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="717"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="671"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="693"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="699"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="709"/>
         <source>Specify second tangent element of the circle: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_circle_cmd.py" line="732"/>
-        <location filename="../cmd/qad_polygon_cmd.py" line="154"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="724"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="152"/>
         <source>Specify the circle radius &lt;{0}&gt;: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_circle_cmd.py" line="767"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="759"/>
         <source>Specify second point: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_circle_cmd.py" line="786"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="788"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="827"/>
-        <location filename="../cmd/qad_circle_cmd.py" line="829"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="775"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="777"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="813"/>
+        <location filename="../cmd/qad_circle_cmd.py" line="815"/>
         <source>
 The circle doesn&apos;t exist.</source>
         <translation></translation>
@@ -1113,21 +1113,21 @@ The value must be between 2 and 32767.</source>
     </message>
     <message>
         <location filename="../cmd/qad_ellipse_cmd.py" line="133"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="428"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="435"/>
         <source>Arc</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_ellipse_cmd.py" line="134"/>
         <location filename="../cmd/qad_ellipse_cmd.py" line="140"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="431"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="438"/>
         <source>Center</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_ellipse_cmd.py" line="135"/>
         <location filename="../cmd/qad_ellipse_cmd.py" line="141"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="433"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="440"/>
         <source>Foci</source>
         <translation></translation>
     </message>
@@ -1148,13 +1148,13 @@ The value must be between 2 and 32767.</source>
     </message>
     <message>
         <location filename="../cmd/qad_ellipse_cmd.py" line="179"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="497"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="504"/>
         <source>Rotation</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_ellipse_cmd.py" line="180"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="499"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="506"/>
         <source>Area</source>
         <translation></translation>
     </message>
@@ -1176,8 +1176,8 @@ The value must be between 2 and 32767.</source>
     <message>
         <location filename="../cmd/qad_ellipse_cmd.py" line="237"/>
         <location filename="../cmd/qad_ellipse_cmd.py" line="260"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="619"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="662"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="617"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="657"/>
         <source>Parameter</source>
         <translation></translation>
     </message>
@@ -1189,8 +1189,8 @@ The value must be between 2 and 32767.</source>
     <message>
         <location filename="../cmd/qad_ellipse_cmd.py" line="261"/>
         <location filename="../cmd/qad_ellipse_cmd.py" line="322"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="664"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="781"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="659"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="770"/>
         <source>Included angle</source>
         <translation></translation>
     </message>
@@ -1207,8 +1207,8 @@ The value must be between 2 and 32767.</source>
     <message>
         <location filename="../cmd/qad_ellipse_cmd.py" line="299"/>
         <location filename="../cmd/qad_ellipse_cmd.py" line="321"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="736"/>
-        <location filename="../cmd/qad_ellipse_cmd.py" line="779"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="728"/>
+        <location filename="../cmd/qad_ellipse_cmd.py" line="768"/>
         <source>Angle</source>
         <translation></translation>
     </message>
@@ -1451,8 +1451,8 @@ Fillet with radius &lt;{0}&gt; impossible.</source>
 <context>
     <name>Command_GRIP</name>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="965"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="1040"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="966"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="1041"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1647"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1714"/>
         <location filename="../cmd/qad_stretch_cmd.py" line="784"/>
@@ -1461,8 +1461,8 @@ Fillet with radius &lt;{0}&gt; impossible.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="966"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="1043"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="967"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="1044"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="930"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="987"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1648"/>
@@ -1475,8 +1475,8 @@ Fillet with radius &lt;{0}&gt; impossible.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="967"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="1048"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="968"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="1049"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="931"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="992"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1649"/>
@@ -1489,8 +1489,8 @@ Fillet with radius &lt;{0}&gt; impossible.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="968"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="1056"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="969"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="1057"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="932"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="1000"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1650"/>
@@ -1503,7 +1503,7 @@ Fillet with radius &lt;{0}&gt; impossible.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="995"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="996"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1634"/>
         <source>Specify base point: </source>
         <translation></translation>
@@ -1520,12 +1520,12 @@ Fillet with radius &lt;{0}&gt; impossible.</source>
 <context>
     <name>Command_GRIPCHANGEARCRADIUS</name>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="969"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="970"/>
         <source>Specify the radius or [{0}]: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="1011"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="1012"/>
         <source>
 ** RADIUS **
 </source>
@@ -1831,18 +1831,18 @@ The points must be different.</source>
 <context>
     <name>Command_INSERT</name>
     <message>
-        <location filename="../cmd/qad_insert_cmd.py" line="62"/>
+        <location filename="../cmd/qad_insert_cmd.py" line="63"/>
         <source>Insert a symbol.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_insert_cmd.py" line="181"/>
+        <location filename="../cmd/qad_insert_cmd.py" line="182"/>
         <source>Specify the symbol scale &lt;{0}&gt;: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_insert_cmd.py" line="197"/>
-        <location filename="../cmd/qad_insert_cmd.py" line="226"/>
+        <location filename="../cmd/qad_insert_cmd.py" line="198"/>
+        <location filename="../cmd/qad_insert_cmd.py" line="227"/>
         <source>Specify the symbol rotation &lt;{0}&gt;: </source>
         <translation></translation>
     </message>
@@ -1982,47 +1982,47 @@ Current length: {0}</source>
 <context>
     <name>Command_LINE</name>
     <message>
-        <location filename="../cmd/qad_line_cmd.py" line="66"/>
+        <location filename="../cmd/qad_line_cmd.py" line="67"/>
         <source>Creates straight line segments.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_line_cmd.py" line="169"/>
-        <location filename="../cmd/qad_line_cmd.py" line="205"/>
+        <location filename="../cmd/qad_line_cmd.py" line="173"/>
+        <location filename="../cmd/qad_line_cmd.py" line="209"/>
         <source>Specify first point: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_line_cmd.py" line="198"/>
-        <location filename="../cmd/qad_line_cmd.py" line="414"/>
-        <location filename="../cmd/qad_line_cmd.py" line="417"/>
+        <location filename="../cmd/qad_line_cmd.py" line="202"/>
+        <location filename="../cmd/qad_line_cmd.py" line="418"/>
+        <location filename="../cmd/qad_line_cmd.py" line="421"/>
         <source>Undo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_line_cmd.py" line="211"/>
-        <location filename="../cmd/qad_line_cmd.py" line="413"/>
+        <location filename="../cmd/qad_line_cmd.py" line="215"/>
+        <location filename="../cmd/qad_line_cmd.py" line="417"/>
         <source>Close</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_line_cmd.py" line="269"/>
-        <location filename="../cmd/qad_line_cmd.py" line="290"/>
-        <location filename="../cmd/qad_line_cmd.py" line="375"/>
+        <location filename="../cmd/qad_line_cmd.py" line="273"/>
+        <location filename="../cmd/qad_line_cmd.py" line="294"/>
+        <location filename="../cmd/qad_line_cmd.py" line="379"/>
         <source>
 No tangent possible</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_line_cmd.py" line="336"/>
-        <location filename="../cmd/qad_line_cmd.py" line="357"/>
-        <location filename="../cmd/qad_line_cmd.py" line="392"/>
+        <location filename="../cmd/qad_line_cmd.py" line="340"/>
+        <location filename="../cmd/qad_line_cmd.py" line="361"/>
+        <location filename="../cmd/qad_line_cmd.py" line="396"/>
         <source>
 No perpendicular possible</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_line_cmd.py" line="419"/>
+        <location filename="../cmd/qad_line_cmd.py" line="423"/>
         <source>Specify next point or [{0}]: </source>
         <translation></translation>
     </message>
@@ -2227,8 +2227,8 @@ arcs or a combination of two.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_mpolygon_cmd.py" line="133"/>
-        <location filename="../cmd/qad_mpolygon_cmd.py" line="136"/>
+        <location filename="../cmd/qad_mpolygon_cmd.py" line="135"/>
+        <location filename="../cmd/qad_mpolygon_cmd.py" line="138"/>
         <source>
 Polygon not valid.
 </source>
@@ -2627,19 +2627,19 @@ and arc segments.</source>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="149"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="547"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="939"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="978"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1012"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1224"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1264"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1300"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="557"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="951"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="990"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1024"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1236"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1276"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1312"/>
         <source>Angle</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="150"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="561"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="571"/>
         <source>CEnter</source>
         <comment>WaitForArcMenu</comment>
         <translation></translation>
@@ -2647,74 +2647,74 @@ and arc segments.</source>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="151"/>
         <location filename="../cmd/qad_pline_cmd.py" line="192"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="395"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="569"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="399"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="579"/>
         <source>Close</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="152"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="579"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="591"/>
         <source>Direction</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="153"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="590"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="602"/>
         <source>Line</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="154"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="596"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="667"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="712"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="734"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="608"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="679"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="724"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="746"/>
         <source>Radius</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="155"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="608"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="620"/>
         <source>Second point</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="156"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="617"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="629"/>
         <source>Undo</source>
         <comment>WaitForArcMenu</comment>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="161"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="669"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="735"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="941"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1014"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1225"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1265"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="681"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="747"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="953"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1026"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1237"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1277"/>
         <source>Specify the final point of the arc (hold Ctrl to switch direction) or [{0}]: </source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="191"/>
         <location filename="../cmd/qad_pline_cmd.py" line="198"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="374"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="378"/>
         <source>Arc</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="193"/>
         <location filename="../cmd/qad_pline_cmd.py" line="199"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="377"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="381"/>
         <source>Length</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="194"/>
         <location filename="../cmd/qad_pline_cmd.py" line="200"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="388"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="392"/>
         <source>Undo</source>
         <comment>WaitForLineMenu</comment>
         <translation></translation>
@@ -2722,7 +2722,7 @@ and arc segments.</source>
     <message>
         <location filename="../cmd/qad_pline_cmd.py" line="195"/>
         <location filename="../cmd/qad_pline_cmd.py" line="201"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="400"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="406"/>
         <source>Trace</source>
         <translation></translation>
     </message>
@@ -2742,94 +2742,94 @@ and arc segments.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="381"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="385"/>
         <source>Specify line length: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="555"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1305"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="565"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1317"/>
         <source>Specify the included angle: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="567"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="780"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="577"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="792"/>
         <source>Specify the center of the arc: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="586"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="598"/>
         <source>Specify the tangent direction for the start point of the arc: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="603"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="717"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="615"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="729"/>
         <source>Specify the radius of the arc: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="614"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="626"/>
         <source>Specify second point of the arc: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="666"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="706"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="733"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="678"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="718"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="745"/>
         <source>CEnter</source>
         <comment>START_PT_ANGLE_KNOWN_ASK_FOR_END_PT</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="710"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="722"/>
         <source>Specify the center of the arc (hold Ctrl to switch direction): </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="812"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1214"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="824"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1226"/>
         <source>Specify second point: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="823"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="859"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="906"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1351"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1400"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="835"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="871"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="918"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1363"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1412"/>
         <source>Specify the direction for the chord of the arc (hold Ctrl to switch direction) &lt;{0}&gt;: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="940"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="989"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1013"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="952"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1001"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1025"/>
         <source>chord Length</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="983"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1064"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="995"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1076"/>
         <source>Specify the included angle (hold Ctrl to switch direction): </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="994"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1109"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1006"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1121"/>
         <source>Specify the chord length (hold Ctrl to switch direction): </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="1146"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1182"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1158"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1194"/>
         <source>Specify the final point of the arc (hold Ctrl to switch direction): </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_pline_cmd.py" line="1433"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="1468"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1445"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="1480"/>
         <source>Specify the final point of the arc: </source>
         <translation></translation>
     </message>
@@ -2842,62 +2842,62 @@ and arc segments.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="102"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="100"/>
         <source>Enter number of sides &lt;{0}&gt;: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="113"/>
-        <location filename="../cmd/qad_polygon_cmd.py" line="267"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="111"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="265"/>
         <source>Edge</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="114"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="112"/>
         <source>Specify center of polygon or [{0}]: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="129"/>
-        <location filename="../cmd/qad_polygon_cmd.py" line="335"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="127"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="333"/>
         <location filename="../cmd/qad_polygon_maptool.py" line="92"/>
         <location filename="../qad.py" line="115"/>
         <source>Inscribed in circle</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="130"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="128"/>
         <source>Circumscribed about circle</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="131"/>
-        <location filename="../cmd/qad_polygon_cmd.py" line="299"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="129"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="297"/>
         <source>Area</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="132"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="130"/>
         <source>Enter an option [{0}] &lt;{1}&gt;: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="168"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="166"/>
         <source>Specify the first point of the edge: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="183"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="181"/>
         <source>Specify the second point of the edge: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="191"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="189"/>
         <source>Enter the polygon area in current units &lt;{0}&gt;: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_polygon_cmd.py" line="234"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="232"/>
         <source>
 Enter an integer greater than 2.</source>
         <translation></translation>
@@ -3529,23 +3529,23 @@ found {0}</source>
 <context>
     <name>Command_TEXT</name>
     <message>
-        <location filename="../cmd/qad_text_cmd.py" line="65"/>
+        <location filename="../cmd/qad_text_cmd.py" line="66"/>
         <source>Inserts a text.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_text_cmd.py" line="161"/>
+        <location filename="../cmd/qad_text_cmd.py" line="162"/>
         <source>Enter the value of attribute &quot;{0}&quot;: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_text_cmd.py" line="232"/>
+        <location filename="../cmd/qad_text_cmd.py" line="233"/>
         <source>Specify the text height &lt;{0}&gt;: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_text_cmd.py" line="248"/>
-        <location filename="../cmd/qad_text_cmd.py" line="280"/>
+        <location filename="../cmd/qad_text_cmd.py" line="249"/>
+        <location filename="../cmd/qad_text_cmd.py" line="281"/>
         <source>Specify the text rotation &lt;{0}&gt;: </source>
         <translation></translation>
     </message>
@@ -3739,7 +3739,7 @@ A mark can&apos;t be inserted into a group.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_line_cmd.py" line="53"/>
+        <location filename="../cmd/qad_line_cmd.py" line="54"/>
         <location filename="../qad.py" line="939"/>
         <location filename="../qad.py" line="1959"/>
         <source>LINE</source>
@@ -3851,14 +3851,14 @@ A mark can&apos;t be inserted into a group.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_insert_cmd.py" line="49"/>
+        <location filename="../cmd/qad_insert_cmd.py" line="50"/>
         <location filename="../qad.py" line="921"/>
         <location filename="../qad.py" line="2009"/>
         <source>INSERT</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_text_cmd.py" line="52"/>
+        <location filename="../cmd/qad_text_cmd.py" line="53"/>
         <location filename="../qad.py" line="1047"/>
         <location filename="../qad.py" line="2012"/>
         <source>TEXT</source>
@@ -3992,7 +3992,7 @@ A mark can&apos;t be inserted into a group.</source>
         <location filename="../qad.py" line="1041"/>
         <location filename="../qad.py" line="2063"/>
         <location filename="../qad_commands.py" line="248"/>
-        <location filename="../qad_commands.py" line="312"/>
+        <location filename="../qad_commands.py" line="315"/>
         <source>SUPPORTERS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6228,21 +6228,21 @@ The dimension style &quot;{0}&quot; </source>
         <location filename="../qad_arc.py" line="528"/>
         <location filename="../qad_circle.py" line="214"/>
         <location filename="../qad_ellipse.py" line="327"/>
-        <location filename="../qad_ellipse.py" line="648"/>
+        <location filename="../qad_ellipse.py" line="712"/>
         <location filename="../qad_ellipse_arc.py" line="460"/>
-        <location filename="../qad_ellipse_arc.py" line="736"/>
+        <location filename="../qad_ellipse_arc.py" line="777"/>
         <location filename="../qad_join_fun.py" line="441"/>
         <location filename="../qad_options_dlg.py" line="154"/>
         <location filename="../qad_options_dlg.py" line="228"/>
         <location filename="../qad_options_dlg.py" line="312"/>
-        <location filename="../qad_polyline.py" line="716"/>
+        <location filename="../qad_polyline.py" line="794"/>
         <location filename="../qad_variables.py" line="1046"/>
         <source>TOLERANCE2APPROXCURVE</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../qad_arc.py" line="533"/>
-        <location filename="../qad_arc.py" line="872"/>
+        <location filename="../qad_arc.py" line="925"/>
         <location filename="../qad_mbuffer_fun.py" line="46"/>
         <location filename="../qad_offset_fun.py" line="94"/>
         <location filename="../qad_options_dlg.py" line="130"/>
@@ -6254,7 +6254,7 @@ The dimension style &quot;{0}&quot; </source>
     </message>
     <message>
         <location filename="../qad_circle.py" line="219"/>
-        <location filename="../qad_circle.py" line="285"/>
+        <location filename="../qad_circle.py" line="360"/>
         <location filename="../qad_options_dlg.py" line="136"/>
         <location filename="../qad_options_dlg.py" line="213"/>
         <location filename="../qad_options_dlg.py" line="288"/>
@@ -6429,7 +6429,7 @@ The dimension style &quot;{0}&quot; </source>
         <location filename="../cmd/qad_lengthen_cmd.py" line="517"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="634"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1036"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="482"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="488"/>
         <location filename="../cmd/qad_trim_cmd.py" line="371"/>
         <location filename="../qad_entity.py" line="1088"/>
         <location filename="../qad_entity.py" line="1121"/>
@@ -7509,8 +7509,8 @@ Negative values represent smaller sizes than the default.</source>
     </message>
     <message>
         <location filename="../qad_ellipse.py" line="332"/>
-        <location filename="../qad_ellipse.py" line="436"/>
-        <location filename="../qad_ellipse.py" line="652"/>
+        <location filename="../qad_ellipse.py" line="500"/>
+        <location filename="../qad_ellipse.py" line="716"/>
         <location filename="../qad_options_dlg.py" line="148"/>
         <location filename="../qad_options_dlg.py" line="223"/>
         <location filename="../qad_options_dlg.py" line="304"/>
@@ -7520,8 +7520,8 @@ Negative values represent smaller sizes than the default.</source>
     </message>
     <message>
         <location filename="../qad_ellipse_arc.py" line="465"/>
-        <location filename="../qad_ellipse_arc.py" line="522"/>
-        <location filename="../qad_ellipse_arc.py" line="740"/>
+        <location filename="../qad_ellipse_arc.py" line="563"/>
+        <location filename="../qad_ellipse_arc.py" line="781"/>
         <location filename="../qad_options_dlg.py" line="142"/>
         <location filename="../qad_options_dlg.py" line="218"/>
         <location filename="../qad_options_dlg.py" line="296"/>
@@ -7531,8 +7531,8 @@ Negative values represent smaller sizes than the default.</source>
     </message>
     <message>
         <location filename="../qad.py" line="108"/>
-        <location filename="../qad_arc.py" line="913"/>
-        <location filename="../qad_ellipse_arc.py" line="610"/>
+        <location filename="../qad_arc.py" line="973"/>
+        <location filename="../qad_ellipse_arc.py" line="651"/>
         <location filename="../qad_join_fun.py" line="61"/>
         <location filename="../qad_join_fun.py" line="280"/>
         <location filename="../qad_options_dlg.py" line="124"/>
@@ -8350,26 +8350,26 @@ The aperture box is a box that appears inside the crosshairs when you snap to an
     </message>
     <message>
         <location filename="../qad_commands.py" line="250"/>
-        <location filename="../qad_commands.py" line="314"/>
-        <source>You have run out of daily commands available for this version of QAD, your reasonable donation will allow us to adapt the product to your needs. Do you want to donate ?</source>
+        <location filename="../qad_commands.py" line="317"/>
+        <source>QAD plugin is supported by donors. Donations help us to fund software development, documentation, translation and bug-fixing efforts. Do you want to donate ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qad_commands.py" line="289"/>
-        <location filename="../qad_commands.py" line="322"/>
-        <location filename="../qad_commands.py" line="597"/>
+        <location filename="../qad_commands.py" line="292"/>
+        <location filename="../qad_commands.py" line="328"/>
+        <location filename="../qad_commands.py" line="603"/>
         <location filename="../qad_textwindow.py" line="1021"/>
         <source>
 Invalid command &quot;{0}&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qad_commands.py" line="390"/>
+        <location filename="../qad_commands.py" line="396"/>
         <source>*Canceled*</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qad_commands.py" line="674"/>
+        <location filename="../qad_commands.py" line="680"/>
         <source>Well, this is embarrassing !
 
 </source>
@@ -8602,13 +8602,13 @@ Ambiguous answer: specify with more clarity...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_text_cmd.py" line="187"/>
+        <location filename="../cmd/qad_text_cmd.py" line="188"/>
         <source>
 Current layer is not a textual layer.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_text_cmd.py" line="188"/>
+        <location filename="../cmd/qad_text_cmd.py" line="189"/>
         <location filename="../qad_dim.py" line="1011"/>
         <source>
 A textual layer is a vector punctual layer having a label and the symbol transparency no more than 10%.
@@ -8617,7 +8617,7 @@ A textual layer is a vector punctual layer having a label and the symbol transpa
     </message>
     <message>
         <location filename="../cmd/qad_divide_cmd.py" line="226"/>
-        <location filename="../cmd/qad_insert_cmd.py" line="141"/>
+        <location filename="../cmd/qad_insert_cmd.py" line="142"/>
         <location filename="../cmd/qad_measure_cmd.py" line="236"/>
         <source>
 Current layer is not a symbol layer.</source>
@@ -8625,7 +8625,7 @@ Current layer is not a symbol layer.</source>
     </message>
     <message>
         <location filename="../cmd/qad_divide_cmd.py" line="227"/>
-        <location filename="../cmd/qad_insert_cmd.py" line="142"/>
+        <location filename="../cmd/qad_insert_cmd.py" line="143"/>
         <location filename="../cmd/qad_measure_cmd.py" line="237"/>
         <location filename="../qad_dim.py" line="1019"/>
         <source>
@@ -8636,7 +8636,7 @@ A symbol layer is a vector punctual layer without label.
     <message>
         <location filename="../cmd/qad_divide_cmd.py" line="232"/>
         <location filename="../cmd/qad_measure_cmd.py" line="242"/>
-        <location filename="../cmd/qad_text_cmd.py" line="193"/>
+        <location filename="../cmd/qad_text_cmd.py" line="194"/>
         <source>
 The current layer belongs to a dimension style.
 </source>
@@ -8644,7 +8644,7 @@ The current layer belongs to a dimension style.
     </message>
     <message>
         <location filename="../cmd/qad_arc_cmd.py" line="84"/>
-        <location filename="../cmd/qad_arc_cmd.py" line="1003"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="1004"/>
         <location filename="../cmd/qad_array_cmd.py" line="1055"/>
         <location filename="../cmd/qad_array_cmd.py" line="1934"/>
         <location filename="../cmd/qad_array_cmd.py" line="2015"/>
@@ -8664,12 +8664,12 @@ The current layer belongs to a dimension style.
         <location filename="../cmd/qad_fillet_cmd.py" line="404"/>
         <location filename="../cmd/qad_getangle_cmd.py" line="59"/>
         <location filename="../cmd/qad_getdist_cmd.py" line="62"/>
-        <location filename="../cmd/qad_insert_cmd.py" line="132"/>
+        <location filename="../cmd/qad_insert_cmd.py" line="133"/>
         <location filename="../cmd/qad_joindisjoin_cmd.py" line="358"/>
         <location filename="../cmd/qad_joindisjoin_cmd.py" line="588"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="457"/>
         <location filename="../cmd/qad_lengthen_cmd.py" line="954"/>
-        <location filename="../cmd/qad_line_cmd.py" line="155"/>
+        <location filename="../cmd/qad_line_cmd.py" line="159"/>
         <location filename="../cmd/qad_mapmpedit_cmd.py" line="578"/>
         <location filename="../cmd/qad_mbuffer_cmd.py" line="175"/>
         <location filename="../cmd/qad_measure_cmd.py" line="227"/>
@@ -8683,7 +8683,7 @@ The current layer belongs to a dimension style.
         <location filename="../cmd/qad_pedit_cmd.py" line="1670"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1998"/>
         <location filename="../cmd/qad_pline_cmd.py" line="320"/>
-        <location filename="../cmd/qad_polygon_cmd.py" line="204"/>
+        <location filename="../cmd/qad_polygon_cmd.py" line="202"/>
         <location filename="../cmd/qad_rectangle_cmd.py" line="179"/>
         <location filename="../cmd/qad_rotate_cmd.py" line="224"/>
         <location filename="../cmd/qad_rotate_cmd.py" line="649"/>
@@ -8693,7 +8693,7 @@ The current layer belongs to a dimension style.
         <location filename="../cmd/qad_ssget_cmd.py" line="456"/>
         <location filename="../cmd/qad_stretch_cmd.py" line="301"/>
         <location filename="../cmd/qad_stretch_cmd.py" line="817"/>
-        <location filename="../cmd/qad_text_cmd.py" line="178"/>
+        <location filename="../cmd/qad_text_cmd.py" line="179"/>
         <location filename="../cmd/qad_trim_cmd.py" line="257"/>
         <source>
 The coordinate reference system of the project must be a projected coordinate system.
@@ -8701,7 +8701,7 @@ The coordinate reference system of the project must be a projected coordinate sy
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="1053"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="1054"/>
         <location filename="../cmd/qad_copy_cmd.py" line="427"/>
         <location filename="../cmd/qad_extend_cmd.py" line="354"/>
         <location filename="../cmd/qad_fillet_cmd.py" line="445"/>
@@ -8713,8 +8713,8 @@ The coordinate reference system of the project must be a projected coordinate sy
         <location filename="../cmd/qad_pedit_cmd.py" line="1116"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1727"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="2052"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="394"/>
-        <location filename="../cmd/qad_pline_cmd.py" line="623"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="398"/>
+        <location filename="../cmd/qad_pline_cmd.py" line="635"/>
         <location filename="../cmd/qad_rotate_cmd.py" line="698"/>
         <location filename="../cmd/qad_scale_cmd.py" line="753"/>
         <location filename="../cmd/qad_stretch_cmd.py" line="866"/>
@@ -8724,7 +8724,7 @@ The command has been canceled.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../cmd/qad_arc_cmd.py" line="1061"/>
+        <location filename="../cmd/qad_arc_cmd.py" line="1062"/>
         <location filename="../cmd/qad_offset_cmd.py" line="781"/>
         <location filename="../cmd/qad_pedit_cmd.py" line="1197"/>
         <location filename="../cmd/qad_scale_cmd.py" line="328"/>

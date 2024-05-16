@@ -6442,7 +6442,11 @@ Respuesta ambigua: especificar con mayor claridad...</translation>
     </message>
     <message>
         <source>You have run out of daily commands available for this version of QAD, your reasonable donation will allow us to adapt the product to your needs. Do you want to donate ?</source>
-        <translation>Te has quedado sin comandos diarios disponibles para esta versión de QAD, tu donación razonable nos permitirá adaptar el producto a tus necesidades. ¿Quieres donar?</translation>
+        <translation type="vanished">Te has quedado sin comandos diarios disponibles para esta versión de QAD, tu donación razonable nos permitirá adaptar el producto a tus necesidades. ¿Quieres donar?</translation>
+    </message>
+    <message>
+        <source>QAD plugin is supported by donors. Donations help us to fund software development, documentation, translation and bug-fixing efforts. Do you want to donate ?</source>
+        <translation>El complemento QAD cuenta con el respaldo de los donantes. Las donaciones nos ayudan a financiar el desarrollo de software, la documentación, la traducción y los esfuerzos de corrección de errores. ¿Quieres donar?</translation>
     </message>
 </context>
 <context>
