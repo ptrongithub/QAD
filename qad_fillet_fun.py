@@ -38,7 +38,7 @@ from .qad_offset_fun import offsetBridgeTheGapBetweenLines
 
 
 #============================================================================
-# filletQadGeometry
+# isStartedPtChanged
 #============================================================================
 def isStartedPtChanged(oldQadGeom, newQadGeom, filletQadGeom, nearNewQadGeom):
    """

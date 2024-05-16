@@ -544,7 +544,7 @@ class QadLine():
    #============================================================================
    # asPolyline
    #============================================================================
-   def asPolyline(self, tolerance2ApproxCurve = None, atLeastNSegment=None):
+   def asPolyline(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
       # obbligatoria
       """
       ritorna una lista di punti che definisce la linea
@@ -553,13 +553,55 @@ class QadLine():
 
 
    #===============================================================================
+   # asLineString
+   #===============================================================================
+   def asLineString(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna la linea in forma di lineString.
+      tolerance2ApproxCurve e atLeastNSegment sono usati solo per compatibilità
+      """
+      return QgsLineString(QgsPoint(self.getStartPt()), QgsPoint(self.getEndPt()))
+
+
+   #===============================================================================
+   # asAbstractGeom
+   #===============================================================================
+   def asAbstractGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna la linea in forma di QgsAbstractGeometry.
+      """
+      flatType = QgsWkbTypes.flatType(wkbType)
+
+      if flatType == QgsWkbTypes.CompoundCurve:
+         lineString = self.asLineString()
+         compoundCurve = QgsCompoundCurve()
+         compoundCurve.addCurve(lineString)
+         return compoundCurve
+
+      elif flatType == QgsWkbTypes.MultiCurve:
+         lineString = self.asLineString()
+         multiCurve = QgsMultiCurve()
+         multiCurve.addGeometry(lineString)   
+         return multiCurve
+
+      elif flatType == QgsWkbTypes.MultiLineString:
+         lineString = self.asLineString()
+         multiLineString = QgsMultiLineString()
+         multiLineString.addGeometry(lineString)   
+         return multiLineString
+      
+      return self.asLineString()
+      
+
+   #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna la linea in forma di QgsGeometry.
-      """
-      return QgsGeometry.fromPolylineXY(self.asPolyline(tolerance2ApproxCurve))
+      tolerance2ApproxCurve e atLeastNSegment sono dichiarati solo per compatibilità
+      """     
+      return QgsGeometry(self.asAbstractGeom(wkbType, tolerance2ApproxCurve, atLeastNSegment))
 
 
    #============================================================================

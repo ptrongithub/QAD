@@ -353,21 +353,36 @@ class QadRubberBand():
       self.__rubberBandLine.show()
       self.__rubberBandPolygon.show()
       
-   def addGeometry(self, geom, layer):
-      # uso la geometria del layer per risolvere il caso ambiguo in cui
-      # si vuole inserire una linea chiusa in un layer poligono 
-      geomType = layer.geometryType()
-      #geomType = geom.type()
-      if geomType == QgsWkbTypes.PointGeometry:
-         self.__rubberBandPoint.addGeometry(geom, layer)
-      elif geomType == QgsWkbTypes.LineGeometry:
-         self.__rubberBandLine.addGeometry(geom, layer)
-      elif geomType == QgsWkbTypes.PolygonGeometry:
-         self.__rubberBandPolygon.addGeometry(geom, layer)
-      
-   def addGeometries(self, geoms, layer):
+   def addGeometry(self, geom, layer = None, doUpdate = True):
+      if layer is not None:
+         # uso la geometria del layer per risolvere il caso ambiguo in cui
+         # si vuole inserire una linea chiusa in un layer poligono      
+         geomType = layer.geometryType()
+         #geomType = geom.type()
+         if geomType == QgsWkbTypes.PointGeometry:
+            self.__rubberBandPoint.addGeometry(geom, layer, doUpdate)
+         elif geomType == QgsWkbTypes.LineGeometry:
+            self.__rubberBandLine.addGeometry(geom, layer, doUpdate)
+         elif geomType == QgsWkbTypes.PolygonGeometry:
+            self.__rubberBandPolygon.addGeometry(geom, layer, doUpdate)
+      else:
+         geomType = QgsWkbTypes.geometryType(geom.wkbType())
+         if geomType == QgsWkbTypes.PointGeometry:
+            self.__rubberBandPoint.addGeometry(geom, QgsCoordinateReferenceSystem(), doUpdate)
+         elif geomType == QgsWkbTypes.LineGeometry:
+            self.__rubberBandLine.addGeometry(geom, QgsCoordinateReferenceSystem(), doUpdate)
+         elif geomType == QgsWkbTypes.PolygonGeometry:
+            self.__rubberBandPolygon.addGeometry(geom, QgsCoordinateReferenceSystem(), doUpdate)
+
+
+   def addGeometries(self, geoms, layer = None):
       for g in geoms:
-         self.addGeometry(g, layer)
+         self.addGeometry(g, layer, False)
+      
+      # After adding the final geometry updatePosition() should be called.
+      self.__rubberBandPoint.updatePosition()
+      self.__rubberBandLine.updatePosition()
+      self.__rubberBandPolygon.updatePosition()  
          
          
    def setLine(self, points):
@@ -391,6 +406,12 @@ class QadRubberBand():
          else: # ultimo punto
             self.__rubberBandPolygon.addPoint(points[i], True)
          i = i + 1
+
+
+   def setGeometry(self, geom):
+      self.reset()
+      self.addGeometry(geom)      
+
 
    def addLinePoint(self, point, doUpdate = True, geometryIndex = 0):
       self.__rubberBandLine.addPoint(point, doUpdate, geometryIndex)

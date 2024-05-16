@@ -45,7 +45,7 @@ from . import qad_layer
 from . import qad_label
 from .qad_entity import *
 from .qad_variables import QadVariables
-from .qad_multi_geom import fromQgsGeomToQadGeom
+from .qad_multi_geom import fromQgsGeomToQadGeom, fromQadGeomToQgsGeom
 
 
 """
@@ -749,7 +749,7 @@ class QadDimStyle():
          return False
 
       config = qad_utils.QadRawConfigParser(allow_no_value=True)
-      config.readfp(codecs.open(_path, "r", "utf-8"))
+      config.read_file(codecs.open(_path, "r", "utf-8"))
       #config.read(_path)
 
       value = config.get("dimension_options", "name")
@@ -1464,7 +1464,7 @@ class QadDimStyle():
       # features puntuali
       self.setDimId(dimId, dimEntity.symbolFeatures, True) # setto id_parent
       # plugIn, layer, features, coordTransform, refresh, check_validity
-      if qad_layer.addFeaturesToLayer(plugIn, self.getSymbolLayer(), dimEntity.symbolFeatures, None, False, False, False) == False:
+      if qad_layer.addFeaturesToLayer(plugIn, self.getSymbolLayer(), dimEntity.symbolFeatures, None, False, False) == False:
          plugIn.destroyEditCommand()
          return False
       
@@ -1815,7 +1815,7 @@ class QadDimStyle():
             return None
       
       f = QgsFeature(self.getSymbolFeaturePrototype())
-      g = fromQadGeomToQgsGeom(QadPoint().set(insPt), self.getSymbolLayer().crs())
+      g = fromQadGeomToQgsGeom(QadPoint().set(insPt), self.getSymbolLayer())
       f.setGeometry(g)
 
       # imposto la scala del blocco
@@ -1881,7 +1881,7 @@ class QadDimStyle():
       if symbolFeaturePrototype is None:
          return None
       f = QgsFeature(symbolFeaturePrototype)
-      g = fromQadGeomToQgsGeom(QadPoint().set(insPt), self.getSymbolLayer().crs()) # trasformo la geometria
+      g = fromQadGeomToQgsGeom(QadPoint().set(insPt), self.getSymbolLayer()) # trasformo la geometria
       f.setGeometry(g)
         
       # imposto il tipo di componente della quotatura
@@ -1914,7 +1914,7 @@ class QadDimStyle():
          return None     
       
       f = QgsFeature(self.getSymbolFeaturePrototype())
-      g = fromQadGeomToQgsGeom(QadPoint().set(insPt), self.getSymbolLayer().crs()) # trasformo la geometria
+      g = fromQadGeomToQgsGeom(QadPoint().set(insPt), self.getSymbolLayer()) # trasformo la geometria
       f.setGeometry(g)
 
       # imposto la scala del blocco
@@ -1967,7 +1967,7 @@ class QadDimStyle():
          return None
                
       f = QgsFeature(self.getLinearFeaturePrototype())
-      g = fromQadGeomToQgsGeom(arc, self.getSymbolLayer().crs()) # trasformo la geometria
+      g = fromQadGeomToQgsGeom(arc, self.getLinearLayer()) # trasformo la geometria
       f.setGeometry(g)
          
       try:
@@ -3061,7 +3061,7 @@ class QadDimStyle():
       if textualFeaturePrototype is None:
          return None
       f = QgsFeature(textualFeaturePrototype)
-      g = fromQadGeomToQgsGeom(QadPoint().set(_pt), self.getTextualLayer().crs()) # trasformo la geometria
+      g = fromQadGeomToQgsGeom(QadPoint().set(_pt), self.getTextualLayer()) # trasformo la geometria
       f.setGeometry(g)
 
       # se il testo dipende da un solo campo 
@@ -3221,7 +3221,7 @@ class QadDimStyle():
       if linearFeaturePrototype is None:
          return None
       f = QgsFeature(linearFeaturePrototype)
-      g = fromQadGeomToQgsGeom(leaderLines, self.getLinearLayer().crs())
+      g = fromQadGeomToQgsGeom(leaderLines, self.getLinearLayer())
       f.setGeometry(g)
          
       try:
@@ -3360,7 +3360,7 @@ class QadDimStyle():
          return None
       
       f = QgsFeature(self.getLinearFeaturePrototype())
-      g = fromQadGeomToQgsGeom(extLine, self.getLinearLayer().crs()) # trasformo la geometria
+      g = fromQadGeomToQgsGeom(extLine, self.getLinearLayer()) # trasformo la geometria
       f.setGeometry(g)
                   
       try:
@@ -3493,7 +3493,7 @@ class QadDimStyle():
             return None
                
       f = QgsFeature(self.getLinearFeaturePrototype())
-      g = fromQadGeomToQgsGeom(dimLine, self.getLinearLayer().crs()) # trasformo la geometria
+      g = fromQadGeomToQgsGeom(dimLine, self.getLinearLayer()) # trasformo la geometria
       f.setGeometry(g)
          
       try:
@@ -3605,7 +3605,7 @@ class QadDimStyle():
          return None
       
       f = QgsFeature(self.getLinearFeaturePrototype())
-      g = fromQadGeomToQgsGeom(extLine, self.getLinearLayer().crs()) # trasformo la geometria
+      g = fromQadGeomToQgsGeom(extLine, self.getLinearLayer()) # trasformo la geometria
       f.setGeometry(g)
                   
       try:
@@ -4280,7 +4280,7 @@ class QadDimStyle():
       features = []
       for g in geoms:
          f = QgsFeature(self.getLinearFeaturePrototype())
-         f.setGeometry(fromQadGeomToQgsGeom(g, self.getLinearLayer().crs())) # trasformo la geometria
+         f.setGeometry(fromQadGeomToQgsGeom(g, self.getLinearLayer())) # trasformo la geometria
 
          try:
             # imposto il tipo di componente della quotatura
@@ -4877,10 +4877,10 @@ class QadDimEntity():
       if qad_layer.updateFeatureToLayer(plugIn, self.getTextualLayer(), self.textualFeature, False, False) == False:
          return False
       # plugIn, layer, features, coordTransform, refresh, check_validity
-      if qad_layer.addFeaturesToLayer(plugIn, self.getLinearLayer(), self.linearFeatures, None, False, False, False) == False:  
+      if qad_layer.addFeaturesToLayer(plugIn, self.getLinearLayer(), self.linearFeatures, None, False, False) == False:  
          return False
       # plugIn, layer, features, coordTransform, refresh, check_validity
-      if qad_layer.addFeaturesToLayer(plugIn, self.getSymbolLayer(), self.symbolFeatures, None, False, False, False) == False:  
+      if qad_layer.addFeaturesToLayer(plugIn, self.getSymbolLayer(), self.symbolFeatures, None, False, False) == False:  
          return False
       
       return True
@@ -5451,21 +5451,21 @@ class QadDimEntity():
       g = self.textualFeature.geometry()
       qadGeom = fromQgsGeomToQadGeom(g, self.getTextualLayer().crs())
       qadGeom.move(offsetX, offsetY)
-      g = fromQadGeomToQgsGeom(qadGeom, self.getTextualLayer().crs())
+      g = fromQadGeomToQgsGeom(qadGeom, self.getTextualLayer())
       self.textualFeature.setGeometry(g)
 
       for f in self.linearFeatures:
          g = f.geometry()
          qadGeom = fromQgsGeomToQadGeom(g, self.getLinearLayer().crs())
          qadGeom.move(offsetX, offsetY)
-         g = fromQadGeomToQgsGeom(qadGeom, self.getLinearLayer().crs())
+         g = fromQadGeomToQgsGeom(qadGeom, self.getLinearLayer())
          f.setGeometry(g)
 
       for f in self.symbolFeatures:
          g = f.geometry()
          qadGeom = fromQgsGeomToQadGeom(g, self.getSymbolLayer().crs())
          qadGeom.move(offsetX, offsetY)
-         g = fromQadGeomToQgsGeom(qadGeom, self.getSymbolLayer().crs())
+         g = fromQadGeomToQgsGeom(qadGeom, self.getSymbolLayer())
          f.setGeometry(g)
       
       return False

@@ -1,6 +1,9 @@
 version 3.0.6
 ---------------------------
 
+* 2024-05-16 Fixed bug on draw a line from tangent to tangent
+* 2024-05-16 Fixed bug on dimension (reported by em-rezende)
+* 2024-05-16 Full support for curved type layer (compoundCurve, multiCurve, curvePolygon, multiSurface)
 * 2024-02-14 Selecting a point you can choose the "Midpoint between 2 points" option
 * 2024-01-19 Fixed bug on selection options (reported by Justin Ralston)
 * 2023-10-17 Added Polar Tracking options: additional angles. (inspired by Jonathan GUILLERM)

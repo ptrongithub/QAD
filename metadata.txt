@@ -16,7 +16,7 @@ description=Quantum Aided Design: cad like commands in QGIS
 about=Quantum Aided Design: cad like commands in QGIS
 version=3.0.6
 tracker=https://github.com/gam17/QAD/issues
-repository=https://qadplugin.wordpress.com
+repository=https://github.com/gam17/QAD
 
 # end of mandatory metadata
 
@@ -27,7 +27,7 @@ category=Vector
 # tags are comma separated with spaces allowed
 tags=cad,circle,digitizing,dimensioning,ellipse,polygon,polyline,rectangle,snap,vector
 
-homepage=https://github.com/gam17/QAD
+homepage=https://qadplugin.wordpress.com
 icon=icons/qad.png
 # experimental flag
 experimental=False

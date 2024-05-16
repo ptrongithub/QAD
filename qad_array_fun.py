@@ -54,7 +54,7 @@ def doMoveAndRotateGeom(plugIn, entity, offsetX, offsetY, angle, basePt, addToLa
       if angle is not None:
          qadGeom.rotate(basePt, angle)
          
-      g = fromQadGeomToQgsGeom(qadGeom, entity.crs())
+      g = fromQadGeomToQgsGeom(qadGeom, entity.layer)
       if addToLayer:
          newF = QgsFeature(entity.getFeature()) # la copio perchè altrimenti qgis si incarta
          newF.setGeometry(g)

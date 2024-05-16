@@ -550,7 +550,10 @@ class QadArc(QadCircle):
       SegmentTot = math.ceil(self.length() / SegmentLen)
       if SegmentTot < _atLeastNSegment:
          SegmentTot = _atLeastNSegment
-      
+
+      if SegmentTot > 99999: # metto un limite al numero di segmenti
+         SegmentTot = _atLeastNSegment
+
       points = []
       if self.reversed:  # la direzione dell'arco è invertita
          pt = qad_utils.getPolarPointByPtAngle(self.center, self.endAngle, self.radius)
@@ -588,13 +591,63 @@ class QadArc(QadCircle):
 
 
    #===============================================================================
+   # asCircularString
+   #===============================================================================
+   def asCircularString(self):
+      """
+      la funzione ritorna l'arco in forma di circularString.
+      """
+      return QgsCircularString(QgsPoint(self.getStartPt()), QgsPoint(self.getMiddlePt()), QgsPoint(self.getEndPt()))
+
+
+   #===============================================================================
+   # asLineString
+   #===============================================================================
+   def asLineString(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna l'arco in forma di lineString.
+      """
+      return QgsLineString(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
+
+
+   #===============================================================================
+   # asAbstractGeom
+   #===============================================================================
+   def asAbstractGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna l'arco in forma di QgsAbstractGeometry.
+      """
+      flatType = QgsWkbTypes.flatType(wkbType)
+      
+      if flatType == QgsWkbTypes.CompoundCurve:
+         circularString = self.asCircularString()
+         compoundCurve = QgsCompoundCurve()
+         compoundCurve.addCurve(circularString)   
+         return compoundCurve
+
+      elif flatType == QgsWkbTypes.MultiCurve:
+         circularString = self.asCircularString()
+         multiCurve = QgsMultiCurve()
+         multiCurve.addGeometry(circularString)
+         return multiCurve
+         
+      elif flatType == QgsWkbTypes.MultiLineString:
+         lineString = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         multiLineString = QgsMultiLineString()
+         multiLineString.addGeometry(lineString) 
+         return multiLineString
+         
+      return self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+      
+
+   #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None, atLeastNSegment=None):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna l'arco in forma di QgsGeometry.
       """
-      return QgsGeometry.fromPolylineXY(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
+      return QgsGeometry(self.asAbstractGeom(wkbType, tolerance2ApproxCurve, atLeastNSegment));
 
    
    #============================================================================
@@ -887,18 +940,25 @@ class QadArc(QadCircle):
       myPoints.append(qad_utils.movePoint(points[startVertex + 1], -dx, -dy))
       myPoints.append(qad_utils.movePoint(points[startVertex + 2], -dx, -dy))
          
-      InfinityLinePerpOnMiddle1 = qad_utils.getInfinityLinePerpOnMiddle(myPoints[0], myPoints[1])
-      if InfinityLinePerpOnMiddle1 is None: return None
-      InfinityLinePerpOnMiddle2 = qad_utils.getInfinityLinePerpOnMiddle(myPoints[1], myPoints[2])
-      if InfinityLinePerpOnMiddle2 is None: return None
- 
-      # calcolo il presunto centro con 2 segmenti
-      center = qad_utils.getIntersectionPointOn2InfinityLines(InfinityLinePerpOnMiddle1[0], \
-                                                              InfinityLinePerpOnMiddle1[1], \
-                                                              InfinityLinePerpOnMiddle2[0], \
-                                                              InfinityLinePerpOnMiddle2[1])
-      if center is None: return None # linee parallele
+#       InfinityLinePerpOnMiddle1 = qd_utils.getInfinityLinePerpOnMiddle(myPoints[0], myPoints[1])
+#       if InfinityLinePerpOnMiddle1 is None: return None
+#       InfinityLinePerpOnMiddle2 = qad_utils.getInfinityLinePerpOnMiddle(myPoints[1], myPoints[2])
+#       if InfinityLinePerpOnMiddle2 is None: return None
+#  
+#       # calcolo il presunto centro con 2 segmenti
+#       center = qad_utils.getIntersectionPointOn2InfinityLines(InfinityLinePerpOnMiddle1[0], \
+#                                                               InfinityLinePerpOnMiddle1[1], \
+#                                                               InfinityLinePerpOnMiddle2[0], \
+#                                                               InfinityLinePerpOnMiddle2[1])
+#       if center is None: return None # linee parallele
       
+      # se uso QgsCircle ottengo una miglior precisione
+      circle = QgsCircle.from3Points(QgsPoint(myPoints[0]), QgsPoint(myPoints[1]), QgsPoint(myPoints[2]))
+      if circle.isEmpty() == True:
+         return None
+      
+      center = circle.center()
+      center = QgsPointXY(center.x(), center.y())      
       radius = qad_utils.getDistance(center, myPoints[0])  # calcolo il presunto raggio
        
       # calcolo il verso dell'arco e l'angolo dell'arco

@@ -248,7 +248,7 @@ class QadPolyline():
                                                         pt, \
                                                         nextLinearObject.totalAngle()) == False:
                   return False
-               prevLinearObject.reversed = True
+               nextLinearObject.reversed = True
             else:
                # sposto il punto iniziale dell'arco
                if nextLinearObject.fromStartEndPtsAngle(pt, \
@@ -443,7 +443,7 @@ class QadPolyline():
    #===============================================================================
    # asPolyline
    #===============================================================================
-   def asPolyline(self, tolerance2ApproxCurve = None):
+   def asPolyline(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna una lista di punti che compone la polilinea formata da una lista di
       oggetti lineari consecutivi.
@@ -451,7 +451,7 @@ class QadPolyline():
       result = []
       firstPt = True
       for linearObject in self.defList:
-         pts = linearObject.asPolyline(tolerance2ApproxCurve)
+         pts = linearObject.asPolyline(tolerance2ApproxCurve, atLeastNSegment)
          ptsLen = len(pts)
          if firstPt:
             i = 0
@@ -464,15 +464,93 @@ class QadPolyline():
                      
       return result
 
+   
+   #===============================================================================
+   # asLineString
+   #===============================================================================
+   def asLineString(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna la polilinea in forma di lineString.
+      """
+      return QgsLineString(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
+
+   
+   #===============================================================================
+   # asCompoundString
+   #===============================================================================
+   def asCompoundString(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna la polilinea in forma di compoundString.
+      """
+      compoundCurve = QgsCompoundCurve()
+      for linearObject in self.defList:
+         if linearObject.whatIs() == "ARC":
+            compoundCurve.addCurve(linearObject.asCircularString())
+         else:
+            compoundCurve.addCurve(linearObject.asLineString(tolerance2ApproxCurve, atLeastNSegment))              
+      return compoundCurve
+
+
+   #===============================================================================
+   # asAbstractGeom
+   #===============================================================================
+   def asAbstractGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna la polilinea in forma di QgsAbstractGeometry.
+      """
+      flatType = QgsWkbTypes.flatType(wkbType)
+
+      if flatType == QgsWkbTypes.CompoundCurve:
+         compoundCurve = self.asCompoundString(tolerance2ApproxCurve, atLeastNSegment)
+         return compoundCurve
+
+      elif flatType == QgsWkbTypes.MultiCurve:
+         compoundCurve = self.asCompoundString(tolerance2ApproxCurve, atLeastNSegment)
+         multiCurve = QgsMultiCurve()
+         multiCurve.addGeometry(compoundCurve)
+         return multiCurve
+         
+      elif flatType == QgsWkbTypes.CurvePolygon:
+         compoundCurve = self.asCompoundString(tolerance2ApproxCurve, atLeastNSegment)
+         curvePolygon = QgsCurvePolygon()
+         curvePolygon.setExteriorRing(compoundCurve)
+         return curvePolygon
+
+      elif flatType == QgsWkbTypes.MultiSurface: # Geometry that is combined from several CurvePolygon is called MultiSurface
+         curvePolygon = self.asAbstractGeom(QgsWkbTypes.CurvePolygon, tolerance2ApproxCurve, atLeastNSegment)
+         multiSurface = QgsMultiSurface()
+         multiSurface.addGeometry(curvePolygon)
+         return multiSurface
+         
+      elif flatType == QgsWkbTypes.Polygon:
+         linestring = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         polygon = QgsPolygon()
+         polygon.setExteriorRing(linestring)
+         return polygon
+      
+      elif flatType == QgsWkbTypes.MultiPolygon:
+         polygon = self.asAbstractGeom(QgsWkbTypes.Polygon, tolerance2ApproxCurve, atLeastNSegment)
+         multiPolygon = QgsMultiPolygon()
+         multiPolygon.addGeometry(polygon)
+         return multiPolygon
+                  
+      elif flatType == QgsWkbTypes.MultiLineString:
+         lineString = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         multiLineString = QgsMultiLineString()
+         multiLineString.addGeometry(lineString) 
+         return multiLineString
+
+      return self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+
 
    #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna la polilinea in forma di QgsGeometry.
       """
-      return QgsGeometry.fromPolylineXY(self.asPolyline(tolerance2ApproxCurve))
+      return QgsGeometry(self.asAbstractGeom(wkbType, tolerance2ApproxCurve, atLeastNSegment))
 
 
    #===============================================================================

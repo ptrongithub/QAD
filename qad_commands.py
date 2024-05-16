@@ -244,14 +244,17 @@ class QadCommandsClass():
          # se c'é un comando attivo
          if self.actualCommand is not None:
             return
-   
+
          if command != QadMsg.translate("Command_list", "SUPPORTERS"):
-            if incrementDailyCmdCounter() > self.plugIn.maxDailyCmdCounter: 
-               if QMessageBox.critical(None, "QAD", QadMsg.translate("QAD", "You have run out of daily commands available for this version of QAD, your reasonable donation will allow us to adapt the product to your needs. Do you want to donate ?"), \
+            if incrementDailyCmdCounter() > self.plugIn.maxDailyCmdCounter:
+               if QMessageBox.question(None, "QAD", QadMsg.translate("QAD", "QAD plugin is supported by donors. Donations help us to fund software development, documentation, translation and bug-fixing efforts. Do you want to donate ?"), \
                                        QMessageBox.Yes, QMessageBox.No) == QMessageBox.Yes:
                   command = "_SUPPORTERS";
-               else:
-                  return
+#                if QMessageBox.critical(None, "QAD", QadMsg.translate("QAD", "You have run out of daily commands available for this version of QAD, your reasonable donation will allow us to adapt the product to your needs. Do you want to donate ?"), \
+#                                        QMessageBox.Yes, QMessageBox.No) == QMessageBox.Yes:
+#                   command = "_SUPPORTERS";
+#                else:
+#                   return
                
          # eccezione per comando virtuale "QadVirtualSelCommandClass" che in realtà non è un comando
          # ma è usato per selezionare oggetti quando nessun comando è attivo
@@ -310,12 +313,15 @@ class QadCommandsClass():
             return
 
          if args[0] != QadMsg.translate("Command_list", "SUPPORTERS"):
-            if incrementDailyCmdCounter() > self.plugIn.maxDailyCmdCounter: 
-               if QMessageBox.critical(None, "QAD", QadMsg.translate("QAD", "You have run out of daily commands available for this version of QAD, your reasonable donation will allow us to adapt the product to your needs. Do you want to donate ?"), \
+            if incrementDailyCmdCounter() > self.plugIn.maxDailyCmdCounter:
+               if QMessageBox.question(None, "QAD", QadMsg.translate("QAD", "QAD plugin is supported by donors. Donations help us to fund software development, documentation, translation and bug-fixing efforts. Do you want to donate ?"), \
                                        QMessageBox.Yes, QMessageBox.No) == QMessageBox.Yes:
-                  args[0] = "_SUPPORTERS";
-               else:
-                  return
+                  args[0] = "_SUPPORTERS";               
+#                if QMessageBox.critical(None, "QAD", QadMsg.translate("QAD", "You have run out of daily commands available for this version of QAD, your reasonable donation will allow us to adapt the product to your needs. Do you want to donate ?"), \
+#                                        QMessageBox.Yes, QMessageBox.No) == QMessageBox.Yes:
+#                   args[0] = "_SUPPORTERS";
+#                else:
+#                   return
          
          self.actualCommand = self.getCommandObj("MACRO_RUNNER")
          if self.actualCommand is None:
@@ -713,4 +719,4 @@ def getMaxDailyCmdCounter():
    except:
       pass
       
-   return 999999
+   return 100

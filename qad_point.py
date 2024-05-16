@@ -99,15 +99,23 @@ class QadPoint(QgsPointXY):
    def copy(self):
       # obbligatoria
       return QadPoint(self)
-
+      
 
    #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna il punto in forma di QgsGeometry.
+      wkbType, tolerance2ApproxCurve e atLeastNSegment sono dichiarati solo per compatibilità
       """
+      flatType = QgsWkbTypes.flatType(wkbType)
+
+      if flatType == QgsWkbTypes.MultiPoint:
+         multiPoint = QgsMultiPoint()
+         multiPoint.addGeometry(QgsPoint(self))   
+         return QgsGeometry(multiPoint)
+      
       return QgsGeometry.fromPointXY(self)
 
 

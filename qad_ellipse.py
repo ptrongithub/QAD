@@ -354,15 +354,79 @@ class QadEllipse():
          
       return points
 
+   
+   #===============================================================================
+   # asLineString
+   #===============================================================================
+   def asLineString(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna l'ellisse in forma di lineString.
+      """
+      return QgsLineString(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
+
+
+   #===============================================================================
+   # asAbstractGeom
+   #===============================================================================
+   def asAbstractGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna l'ellisse in forma di QgsGeometry.
+      """
+      flatType = QgsWkbTypes.flatType(wkbType)
+      
+      if flatType == QgsWkbTypes.CompoundCurve:
+         linestring = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         compoundCurve = QgsCompoundCurve()
+         compoundCurve.addCurve(linestring)
+         return compoundCurve
+         
+      elif flatType == QgsWkbTypes.MultiCurve:
+         linestring = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         multiCurve = QgsMultiCurve()
+         multiCurve.addGeometry(linestring)   
+         return multiCurve
+         
+      elif flatType == QgsWkbTypes.CurvePolygon:
+         linestring = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         curvePolygon = QgsCurvePolygon()
+         curvePolygon.setExteriorRing(linestring)
+         return curvePolygon
+         
+      elif flatType == QgsWkbTypes.MultiSurface: # Geometry that is combined from several CurvePolygon is called MultiSurface
+         curvePolygon = self.asAbstractGeom(QgsWkbTypes.CurvePolygon, tolerance2ApproxCurve, atLeastNSegment)
+         multiSurface = QgsMultiSurface()
+         multiSurface.addGeometry(curvePolygon)
+         return multiSurface
+
+      elif flatType == QgsWkbTypes.Polygon:
+         lineString = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         polygon = QgsPolygon()
+         polygon.setExteriorRing(lineString)
+         return polygon
+
+      elif flatType == QgsWkbTypes.MultiPolygon:
+         polygon = self.asAbstractGeom(QgsWkbTypes.Polygon, tolerance2ApproxCurve, atLeastNSegment)
+         multiPolygon = QgsMultiPolygon()
+         multiPolygon.addGeometry(polygon)
+         return multiPolygon
+            
+      elif flatType == QgsWkbTypes.MultiLineString:
+         lineString = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         multiLineString = QgsMultiLineString()
+         multiLineString.addGeometry(lineString) 
+         return multiLineString
+
+      return self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+
 
    #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None, atLeastNSegment=None):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna l'ellisse in forma di QgsGeometry.
       """
-      return QgsGeometry.fromPolylineXY(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
+      return QgsGeometry(self.asAbstractGeom(wkbType, tolerance2ApproxCurve, atLeastNSegment));
 
 
    #============================================================================

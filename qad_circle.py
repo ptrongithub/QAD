@@ -257,14 +257,89 @@ class QadCircle():
 
 
    #===============================================================================
+   # asCircularString
+   #===============================================================================
+   def asCircularString(self):
+      """
+      la funzione ritorna il cerchio in forma di circularString.
+      """
+      circle = QgsCircle(QgsPoint(self.center), self.radius)
+      return circle.toCircularString()
+
+
+   #===============================================================================
+   # asLineString
+   #===============================================================================
+   def asLineString(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna il cerchio in forma di lineString.
+      """
+      return QgsLineString(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
+
+
+   #===============================================================================
+   # asAbstractGeom
+   #===============================================================================
+   def asAbstractGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna il cerchio in forma di QgsAbstractGeometry.
+      """
+      flatType = QgsWkbTypes.flatType(wkbType)
+      
+      if flatType == QgsWkbTypes.CompoundCurve:
+         circularString = self.asCircularString()
+         compoundCurve = QgsCompoundCurve()
+         compoundCurve.addCurve(circularString)   
+         return compoundCurve
+
+      elif flatType == QgsWkbTypes.MultiCurve:
+         circularString = self.asCircularString()
+         multiCurve = QgsMultiCurve()
+         multiCurve.addGeometry(circularString)   
+         return multiCurve
+         
+      elif flatType == QgsWkbTypes.CurvePolygon:
+         circularString = self.asCircularString()
+         curvePolygon = QgsCurvePolygon()
+         curvePolygon.setExteriorRing(circularString)
+         return curvePolygon
+
+      elif flatType == QgsWkbTypes.MultiSurface: # Geometry that is combined from several CurvePolygon is called MultiSurface
+         curvePolygon = self.asAbstractGeom(QgsWkbTypes.CurvePolygon, tolerance2ApproxCurve, atLeastNSegment)
+         multiSurface = QgsMultiSurface()
+         multiSurface.addGeometry(curvePolygon)
+         return multiSurface
+
+      elif flatType == QgsWkbTypes.Polygon:
+         linestring = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         polygon = QgsPolygon()
+         polygon.setExteriorRing(linestring)
+         return polygon
+
+      elif flatType == QgsWkbTypes.MultiPolygon:
+         polygon = self.asAbstractGeom(QgsWkbTypes.Polygon, tolerance2ApproxCurve, atLeastNSegment)
+         multiPolygon = QgsMultiPolygon()
+         multiPolygon.addGeometry(polygon)
+         return multiPolygon
+            
+      elif flatType == QgsWkbTypes.MultiLineString:
+         lineString = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         multiLineString = QgsMultiLineString()
+         multiLineString.addGeometry(lineString) 
+         return multiLineString
+            
+      return self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+
+   
+   #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None, atLeastNSegment=None):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna il cerchio in forma di QgsGeometry.
       """
-      return QgsGeometry.fromPolylineXY(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
-
+      return QgsGeometry(self.asAbstractGeom(wkbType, tolerance2ApproxCurve, atLeastNSegment))
+      
 
    #============================================================================
    # fromPolyline
@@ -298,19 +373,26 @@ class QadCircle():
       myPoints.append(qad_utils.movePoint(points[1], -dx, -dy))
       myPoints.append(qad_utils.movePoint(points[2], -dx, -dy))
 
-      InfinityLinePerpOnMiddle1 = qad_utils.getInfinityLinePerpOnMiddle(myPoints[0], myPoints[1])
-      if InfinityLinePerpOnMiddle1 is None: return False
-      InfinityLinePerpOnMiddle2 = qad_utils.getInfinityLinePerpOnMiddle(myPoints[1], myPoints[2])
-      if InfinityLinePerpOnMiddle2 is None: return False
-      
-      # calcolo il presunto centro con 2 segmenti
-      center = qad_utils.getIntersectionPointOn2InfinityLines(InfinityLinePerpOnMiddle1[0], \
-                                                              InfinityLinePerpOnMiddle1[1], \
-                                                              InfinityLinePerpOnMiddle2[0], \
-                                                              InfinityLinePerpOnMiddle2[1])
-      if center is None: return False # linee parallele
+#       InfinityLinePerpOnMiddle1 = qad_utils.getInfinityLinePerpOnMiddle(myPoints[0], myPoints[1])
+#       if InfinityLinePerpOnMiddle1 is None: return False
+#       InfinityLinePerpOnMiddle2 = qad_utils.getInfinityLinePerpOnMiddle(myPoints[1], myPoints[2])
+#       if InfinityLinePerpOnMiddle2 is None: return False
+#       
+#       # calcolo il presunto centro con 2 segmenti
+#       center = qad_utils.getIntersectionPointOn2InfinityLines(InfinityLinePerpOnMiddle1[0], \
+#                                                               InfinityLinePerpOnMiddle1[1], \
+#                                                               InfinityLinePerpOnMiddle2[0], \
+#                                                               InfinityLinePerpOnMiddle2[1])
+#       if center is None: return False # linee parallele
 
-      radius = center.distance(myPoints[0]) # calcolo il raggio
+      # se uso QgsCircle ottengo una miglior precisione
+      circle = QgsCircle.from3Points(QgsPoint(myPoints[0]), QgsPoint(myPoints[1]), QgsPoint(myPoints[2]))
+      if circle.isEmpty() == True:
+         return False
+      
+      center = circle.center()
+      center = QgsPointXY(center.x(), center.y())
+      radius = center.distance(myPoints[0]) # calcolo il presunto raggio
      
       # se il punto finale dell'arco è a sinistra del
       # segmento che unisce i punti iniziale e intermedio allora il verso è antiorario

@@ -472,7 +472,8 @@ class QadEllipseArc(QadEllipse):
          param = param - (2 * math.pi)
       pt = self.getPointAt(param)
       
-      angle = qad_utils.getAngleBy3Pts(self.getStartPt(False), self.center, self.getEndPt(False), False)                                    
+      angle = qad_utils.getAngleBy3Pts(self.getStartPt(False), self.center, self.getEndPt(False), False)
+      if angle == 0: return None                          
       angleStep = angle / _atLeastNSegment
       
       points = []
@@ -493,15 +494,55 @@ class QadEllipseArc(QadEllipse):
       if self.reversed: points.reverse()
       return points
 
+   
+   #===============================================================================
+   # asLineString
+   #===============================================================================
+   def asLineString(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna l'ellisse in forma di lineString.
+      """
+      return QgsLineString(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
+
+
+   #===============================================================================
+   # asAbstractGeom
+   #===============================================================================
+   def asAbstractGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna l'ellisse in forma di QgsAbstractGeometry.
+      """
+      flatType = QgsWkbTypes.flatType(wkbType)
+
+      if flatType == QgsWkbTypes.CompoundCurve:
+         linestring = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         compoundCurve = QgsCompoundCurve()
+         compoundCurve.addCurve(linestring)
+         return compoundCurve
+
+      elif flatType == QgsWkbTypes.MultiCurve:
+         linestring = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         multiCurve = QgsMultiCurve()
+         multiCurve.addGeometry(linestring)   
+         return multiCurve
+         
+      elif flatType == QgsWkbTypes.MultiLineString:
+         lineString = self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+         multiLineString = QgsMultiLineString()
+         multiLineString.addGeometry(lineString) 
+         return multiLineString
+      
+      return self.asLineString(tolerance2ApproxCurve, atLeastNSegment)
+
 
    #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
-      la funzione ritorna la linea in forma di QgsGeometry.
+      la funzione ritorna l'ellisse in forma di QgsGeometry.
       """
-      return QgsGeometry.fromPolylineXY(self.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
+      return QgsGeometry(self.asAbstractGeom(wkbType, tolerance2ApproxCurve, atLeastNSegment));
 
 
    #============================================================================

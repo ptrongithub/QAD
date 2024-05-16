@@ -2745,7 +2745,7 @@ class QadTangency():
       circle1.set(arc1.center, arc1.radius)
       lines = QadTangency.fromCircleToArc(circle1, arc2)
       for line in lines:
-         if arc.isPtOnArcOnlyByAngle(line.get_startPt()):
+         if arc1.isPtOnArcOnlyByAngle(line.getStartPt()):
             result.append(line)
       return result
 
@@ -3009,10 +3009,10 @@ class QadTangency():
 
 
    #============================================================================
-   # twoBasicGeomObjects
+   # bestTwoBasicGeomObjects
    #============================================================================
    @staticmethod   
-   def twoBasicGeomObjects(object1, tanPt1, object2, tanPt2):
+   def bestTwoBasicGeomObjects(object1, tanPt1, object2, tanPt2):
       """
       Trova la linea tangente a un oggetto geometrico di base e tangente ad un altro oggetto geometrico di base
       (che ha i punti inziale/finale che rispettivamente sono più vicini ai punti tanPt1 e tanPt2):
@@ -4362,8 +4362,8 @@ def getLineWithStartEndPtsClosestToPts(lines, pt1, pt2):
 
    Avg = sys.float_info.max
    for line in lines:
-      d1 = qad_utils.getDistance(line.get_startPt(), pt1)
-      d2 = qad_utils.getDistance(line.get_endPt(), pt2)         
+      d1 = qad_utils.getDistance(line.getStartPt(), pt1)
+      d2 = qad_utils.getDistance(line.getEndPt(), pt2)         
       currAvg = (d1 + d2) / 2.0           
       if currAvg < Avg: # mediamente più vicino
          Avg = currAvg

@@ -107,7 +107,7 @@ def offsetQGSGeom(qgsGeom, offsetDistOrPoint, gapType, forcedOffsetDist = None):
       resultGeom = qgsGeom.buffer(offsetDist, atLeastNSegment, capStyle, joinStyle, miterLimit)
       
    result = []
-   if resultGeom is not None:
+   if resultGeom is not None:            
       for part in resultGeom.parts():
          result.append(QgsGeometry.fromWkt(part.asWkt())) # se aggiungo direttamente part poi si pianta qgis
 

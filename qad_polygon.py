@@ -193,25 +193,68 @@ class QadPolygon():
    #===============================================================================
    # asPolygon
    #===============================================================================
-   def asPolygon(self, tolerance2ApproxCurve = None):
+   def asPolygon(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna una lista di liste di punti che compongono un poligono.
       """
       result = []
       for closedObject in self.defList:
-         result.append(closedObject.asPolyline(tolerance2ApproxCurve))
+         result.append(closedObject.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
 
       return result
 
    
    #===============================================================================
+   # asAbstractGeom
+   #===============================================================================
+   def asAbstractGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
+      """
+      la funzione ritorna il poligono in forma di QgsAbstractGeometry.
+      """
+      flatType = QgsWkbTypes.flatType(wkbType)
+
+      if flatType == QgsWkbTypes.CurvePolygon:
+         curvePolygon = QgsCurvePolygon()
+         exteriorRing = True
+         for closedObject in self.defList:
+            if exteriorRing == True:
+               curvePolygon.setExteriorRing(closedObject.asAbstractGeom(QgsWkbTypes.CompoundCurve , tolerance2ApproxCurve, atLeastNSegment))
+               exteriorRing = False
+            else:
+               curvePolygon.addInteriorRing(closedObject.asAbstractGeom(QgsWkbTypes.CompoundCurve , tolerance2ApproxCurve, atLeastNSegment))               
+         return curvePolygon
+         
+      elif flatType == QgsWkbTypes.MultiSurface: # Geometry that is combined from several Curvepolygons is called MultiSurface
+         curvedPolygon = self.asAbstractGeom(QgsWkbTypes.CurvePolygon, tolerance2ApproxCurve, atLeastNSegment)
+         multiSurface = QgsMultiSurface()
+         multiSurface.addGeometry(curvedPolygon)
+         return multiSurface
+
+      elif flatType == QgsWkbTypes.MultiPolygon:
+         polygon = self.asAbstractGeom(QgsWkbTypes.Polygon, tolerance2ApproxCurve, atLeastNSegment)
+         multiPolygon = QgsMultiPolygon()
+         multiPolygon.addGeometry(polygon)
+         return multiPolygon
+             
+      polygon = QgsPolygon()
+      exteriorRing = True
+      for closedObject in self.defList:
+         if exteriorRing == True:
+            polygon.setExteriorRing(closedObject.asAbstractGeom(QgsWkbTypes.LineString , tolerance2ApproxCurve, atLeastNSegment))
+            exteriorRing = False
+         else:
+            polygon.addInteriorRing(closedObject.asAbstractGeom(QgsWkbTypes.LineString , tolerance2ApproxCurve, atLeastNSegment))               
+      return polygon
+
+   
+   #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna il poligono in forma di QgsGeometry.
       """
-      return QgsGeometry.fromPolygonXY(self.asPolygon(tolerance2ApproxCurve))
+      return QgsGeometry(self.asAbstractGeom(wkbType, tolerance2ApproxCurve, atLeastNSegment))
 
    
    #===============================================================================
@@ -274,7 +317,7 @@ class QadPolygon():
       """
       la funzione restituisce il punto centroide.
       """
-      g = self.asGeom(tolerance2ApproxCurve)
+      g = self.asGeom(QgsWkbTypes.LineString, tolerance2ApproxCurve)
       if g is not None:
          centroid = g.centroid()
          if centroid is not None:

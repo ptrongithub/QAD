@@ -521,7 +521,7 @@ class QadEntityGripPoints(QgsMapCanvasItem):
                if subGeomType == "ARC":
                   result.extend(self.getGripPointsFromQadArc(closedObj, atGeom, atSubGeom, grips))                 
                elif subGeomType == "CIRCLE":
-                  result.extend(self.getGripPointsFromQadCircle(closedObj, atGeom, atSubGeo))
+                  result.extend(self.getGripPointsFromQadCircle(closedObj, atGeom, atSubGeom))
                elif subGeomType == "ELLIPSE":
                   result.extend(self.getGripPointsFromQadEllipse(closedObj, atGeom, atSubGeom))
                elif subGeomType == "ELLIPSE_ARC":
@@ -589,9 +589,8 @@ class QadEntityGripPoints(QgsMapCanvasItem):
       if isClosed == False:
          linearObject = polyline.getLinearObjectAt(-1) # ultima parte
          endPt = linearObject.getEndPt()      
-         gp = QadEntityGripPoint(self.mapCanvas, endPt, QadGripPointTypeEnum.END_VERTEX, atGeom, atSubGeom, nVertex)
-      
-      result.append(gp)
+         gp = QadEntityGripPoint(self.mapCanvas, endPt, QadGripPointTypeEnum.END_VERTEX, atGeom, atSubGeom, nVertex)      
+         result.append(gp)
          
       return result
 

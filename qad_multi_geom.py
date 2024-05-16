@@ -161,10 +161,13 @@ class QadMultiPoint():
       la funzione aggiunge un punto lineare in fondo alla lista.
       """
       if point is None: return
-      objectType = point.whatIs()
-      if objectType != "POINT":
-         return False
-      self.defList.append(point.copy())
+      if type(point) == QgsPointXY:
+         self.defList.append(QadPoint(point))
+      else:
+         objectType = point.whatIs()
+         if objectType != "POINT": return False
+         self.defList.append(point.copy())
+         
       return True
 
    
@@ -178,7 +181,13 @@ class QadMultiPoint():
       if i >= self.qty():
          return self.append(point)
       else:         
-         return self.defList.insert(i, point.copy())
+         if type(point) == QgsPointXY:
+            self.defList.append(QadPoint(point))
+         else:
+            objectType = point.whatIs()
+            if objectType != "POINT": return False    
+            return self.defList.insert(i, point.copy())
+               
 
 
    #============================================================================
@@ -259,7 +268,7 @@ class QadMultiPoint():
       """
       result = []
       for point in self.defList:
-         result.append(point)
+         result.append(QgsPointXY(point))
 
       return result
 
@@ -267,9 +276,10 @@ class QadMultiPoint():
    #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self):
+   def asGeom(self, wkbType = QgsWkbTypes.MultiPoint , tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna il multiPoint in forma di QgsGeometry.
+      wkbType, tolerance2ApproxCurve e atLeastNSegment sono dichiarati solo per compatibilità
       """
       return QgsGeometry.fromMultiPointXY(self.asMultiPoint())
 
@@ -538,13 +548,13 @@ class QadMultiLinearObject():
    #===============================================================================
    # asMultiPolyline
    #===============================================================================
-   def asMultiPolyline(self, tolerance2ApproxCurve = None):
+   def asMultiPolyline(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna una lista di liste di liste di punti che compongono un multiLinearObject.
       """
       result = []
       for linearObject in self.defList:
-         result.append(linearObject.asPolyline(tolerance2ApproxCurve))
+         result.append(linearObject.asPolyline(tolerance2ApproxCurve, atLeastNSegment))
 
       return result
 
@@ -552,11 +562,19 @@ class QadMultiLinearObject():
    #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None):
+   def asGeom(self, wkbType = QgsWkbTypes.MultiLineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna il multiLinearObject in forma di QgsGeometry.
       """
-      return QgsGeometry.fromMultiPolylineXY(self.asMultiPolyline(tolerance2ApproxCurve))
+      flatType = QgsWkbTypes.flatType(wkbType)
+
+      if flatType == QgsWkbTypes.MultiCurve:
+         multiCurve = QgsMultiCurve()
+         for linearObject in self.defList:
+            multiCurve.addGeometry(linearObject.asAbstractGeom(QgsWkbTypes.CompoundCurve, tolerance2ApproxCurve, atLeastNSegment))
+         return QgsGeometry(multiCurve)
+            
+      return QgsGeometry.fromMultiPolylineXY(self.asMultiPolyline(tolerance2ApproxCurve, atLeastNSegment))
 
 
    #===============================================================================
@@ -619,7 +637,7 @@ class QadMultiLinearObject():
       """
       la funzione restituisce il punto centroide.
       """
-      g = self.asGeom(tolerance2ApproxCurve)
+      g = self.asGeom(QgsWkbTypes.LineString, tolerance2ApproxCurve)
       if g is not None:
          centroid = g.centroid()
          if centroid is not None:
@@ -833,13 +851,13 @@ class QadMultiPolygon():
    #===============================================================================
    # asMultiPolygon
    #===============================================================================
-   def asMultiPolygon(self, tolerance2ApproxCurve = None):
+   def asMultiPolygon(self, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
       la funzione ritorna una lista di liste di liste di punti che compongono un multipoligono.
       """
       result = []
       for polygon in self.defList:
-         result.append(polygon.asPolygon(tolerance2ApproxCurve))
+         result.append(polygon.asPolygon(tolerance2ApproxCurve, atLeastNSegment))
 
       return result
 
@@ -847,11 +865,19 @@ class QadMultiPolygon():
    #===============================================================================
    # asGeom
    #===============================================================================
-   def asGeom(self, tolerance2ApproxCurve = None):
+   def asGeom(self, wkbType = QgsWkbTypes.LineString, tolerance2ApproxCurve = None, atLeastNSegment = None):
       """
-      la funzione ritorna il poligono in forma di QgsGeometry.
+      la funzione ritorna il multipoligono in forma di QgsGeometry.
       """
-      return QgsGeometry.fromMultiPolygonXY(self.asMultiPolygon(tolerance2ApproxCurve))
+      flatType = QgsWkbTypes.flatType(wkbType)
+
+      if flatType == QgsWkbTypes.MultiSurface: # Geometry that is combined from several Curvepolygons is called MultiSurface
+         multiSurface = QgsMultiSurface()
+         for polygon in self.defList:
+            multiSurface.addGeometry(polygon.asAbstractGeom(QgsWkbTypes.CurvePolygon, tolerance2ApproxCurve, atLeastNSegment))
+         return QgsGeometry(multiSurface)
+      
+      return QgsGeometry.fromMultiPolygonXY(self.asMultiPolygon(tolerance2ApproxCurve, atLeastNSegment))
 
    
    #===============================================================================
@@ -914,7 +940,7 @@ class QadMultiPolygon():
       """
       la funzione restituisce il punto centroide.
       """
-      g = self.asGeom(tolerance2ApproxCurve)
+      g = self.asGeom(QgsWkbTypes.LineString, tolerance2ApproxCurve)
       if g is not None:
          centroid = g.centroid()
          if centroid is not None:
@@ -1024,20 +1050,19 @@ def fromQgsGeomToQadGeom(QgsGeom, crs = None):
 #===============================================================================
 # fromQadGeomToQgsGeom
 #===============================================================================
-def fromQadGeomToQgsGeom(qadGeom, crs):
+def fromQadGeomToQgsGeom(qadGeom, layer):
    """
    la funzione ritorna una geometria di QGIS da una geometria di QAD.
    Le coordinate della geometria di QAD sono quelle del canvas per lavorare con coordinate piane xy
    """
-   g = qadGeom.asGeom()
+   g = qadGeom.asGeom(layer.wkbType())
    if g is None: return None
    
-   if crs is not None:
-      # trasformo la geometria nel crs del layer (la geometria di QAD è nel sistema del canvas per lavorare con coordinate piane xy)
-      canvasCrs = qgis.utils.iface.mapCanvas().mapSettings().destinationCrs()
-      if crs != canvasCrs:
-         coordTransform = QgsCoordinateTransform(canvasCrs, crs, QgsProject.instance())
-         g.transform(coordTransform)
+   # trasformo la geometria nel crs del layer (la geometria di QAD è nel sistema del canvas per lavorare con coordinate piane xy)
+   canvasCrs = qgis.utils.iface.mapCanvas().mapSettings().destinationCrs()
+   if layer.crs() != canvasCrs:
+      coordTransform = QgsCoordinateTransform(canvasCrs, layer.crs(), QgsProject.instance())
+      g.transform(coordTransform)
    
    return g
 
