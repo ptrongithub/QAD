@@ -104,7 +104,7 @@ class QadMOVECommandClass(QadCommandClass):
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.move(offsetX, offsetY)
          f = entity.getFeature()
-         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer))
          # plugIn, layer, feature, refresh, check_validity
          if qad_layer.updateFeatureToLayer(self.plugIn, entity.layer, f, False, False) == False:
             return False
@@ -338,7 +338,7 @@ class QadGRIPMOVECommandClass(QadCommandClass):
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.move(offsetX, offsetY)
          f = entity.getFeature()
-         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer))
          if self.copyEntities == False:
             # plugIn, layer, feature, refresh, check_validity
             if qad_layer.updateFeatureToLayer(self.plugIn, entity.layer, f, False, False) == False:

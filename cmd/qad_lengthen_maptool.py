@@ -188,7 +188,7 @@ class Qad_lengthen_maptool(QadGetPoint):
       
       if res == False: # allungamento impossibile
          return
-      geom = fromQadGeomToQgsGeom(newTmpLinearObject, self.layer.crs())
+      geom = fromQadGeomToQgsGeom(newTmpLinearObject, self.layer)
       self.__rubberBand.addGeometry(geom, self.layer)
       
     

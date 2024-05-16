@@ -32,6 +32,8 @@ from ..qad_stretch_fun import stretchQadGeometry
 from ..qad_highlight import QadHighlight
 from ..qad_msg import QadMsg
 from ..qad_entity import QadEntitySet, QadEntity, QadEntityTypeEnum
+from ..qad_multi_geom import fromQadGeomToQgsGeom
+
 
 #===============================================================================
 # Qad_stretch_maptool_ModeEnum class.
@@ -93,7 +95,7 @@ class Qad_stretch_maptool(QadGetPoint):
          
          if stretchedGeom is not None:
             # trasformo la geometria nel crs del layer
-            self.__highlight.addGeometry(fromQadGeomToQgsGeom(stretchedGeom, entity.crs()), entity.layer)
+            self.__highlight.addGeometry(fromQadGeomToQgsGeom(stretchedGeom, entity.layer), entity.layer)
 
       elif entity.whatIs() == "DIMENTITY":
          newDimEntity = QadDimEntity(entity) # la copio
@@ -250,7 +252,7 @@ class Qad_gripStretch_maptool(QadGetPoint):
          
          if stretchedGeom is not None:
             # trasformo la geometria nel crs del layer
-            self.__highlight.addGeometry(fromQadGeomToQgsGeom(stretchedGeom, entity.layer.crs()), entity.layer)
+            self.__highlight.addGeometry(fromQadGeomToQgsGeom(stretchedGeom, entity.layer), entity.layer)
          return stretchedGeom
       elif entity.whatIs() == "DIMENTITY":
          # stiro la quota

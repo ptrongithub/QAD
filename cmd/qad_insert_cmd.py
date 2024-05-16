@@ -36,6 +36,7 @@ from .qad_getdist_cmd import QadGetDistClass
 from .qad_getangle_cmd import QadGetAngleClass
 from ..qad_textwindow import QadInputModeEnum
 from ..qad_msg import QadMsg
+from ..qad_point import QadPoint
 
 
 # Classe che gestisce il comando INSERT
@@ -100,8 +101,8 @@ class QadINSERTCommandClass(QadCommandClass):
 
 
    def addFeature(self, layer):
-      transformedPoint = self.mapToLayerCoordinates(layer, self.insPt)
-      g = QgsGeometry.fromPointXY(transformedPoint)
+      pt = QadPoint(self.insPt)
+      g = self.mapToLayerCoordinates(layer, pt.asGeom(layer.wkbType()))
       f = QgsFeature()
       f.setGeometry(g)
       # Add attribute fields to feature.

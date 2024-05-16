@@ -112,7 +112,7 @@ class QadCOPYCommandClass(QadCommandClass):
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.move(offsetX, offsetY)
          f = entity.getFeature()
-         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer))
          # plugIn, layer, feature, coordTransform, refresh, check_validity
          if qad_layer.addFeatureToLayer(self.plugIn, entity.layer, f, None, False, False, openForm) == False:  
             return False

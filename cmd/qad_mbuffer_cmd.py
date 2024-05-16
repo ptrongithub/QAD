@@ -119,7 +119,7 @@ class QadMBUFFERCommandClass(QadCommandClass):
             bufferedQadGeom = buffer(entity.getQadGeom(), self.width)
             if bufferedQadGeom is not None:
                # trasformo la geometria nel crs del layer
-               bufferGeoms.append(fromQadGeomToQgsGeom(bufferedQadGeom, currLayer.crs()))
+               bufferGeoms.append(fromQadGeomToQgsGeom(bufferedQadGeom, currLayer))
 
       self.plugIn.beginEditCommand("Feature buffered", currLayer)
       

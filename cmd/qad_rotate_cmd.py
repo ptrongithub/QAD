@@ -111,7 +111,7 @@ class QadROTATECommandClass(QadCommandClass):
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.rotate(basePt, angle)
          f = entity.getFeature()
-         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer))
 
          if len(entity.rotFldName) > 0:
             rotValue = f.attribute(entity.rotFldName)
@@ -534,7 +534,7 @@ class QadGRIPROTATECommandClass(QadCommandClass):
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.rotate(basePt, angle)
          f = entity.getFeature()
-         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer))
 
          if len(entity.rotFldName) > 0 is not None:
             rotValue = f.attribute(entity.rotFldName)

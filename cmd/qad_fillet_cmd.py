@@ -175,7 +175,7 @@ class QadFILLETCommandClass(QadCommandClass):
       newQadGeom = setQadGeomAt(qadGeom, subQadGeom, self.atGeom1, self.atSubGeom1)
       if newQadGeom is None:
          return False
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
                               
       self.plugIn.beginEditCommand("Feature edited", layer)
       
@@ -217,7 +217,7 @@ class QadFILLETCommandClass(QadCommandClass):
    
          f = self.entity1.getFeature()
          # trasformo la geometria nel crs del layer
-         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity1.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity1.layer))
          
          # plugIn, layer, feature, refresh, check_validity
          if qad_layer.updateFeatureToLayer(self.plugIn, self.entity1.layer, f, False, False) == False:
@@ -249,7 +249,7 @@ class QadFILLETCommandClass(QadCommandClass):
       if whatToDoPoly1 == 1: # 1=modificare       
          f = self.entity1.getFeature()
          # trasformo la geometria nel crs del layer
-         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity1.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity1.layer))
          
          # plugIn, layer, feature, refresh, check_validity
          if qad_layer.updateFeatureToLayer(self.plugIn, self.entity1.layer, f, False, False) == False:
@@ -267,7 +267,7 @@ class QadFILLETCommandClass(QadCommandClass):
       if whatToDoPoly2 == 1: # 1=modificare
          f = self.entity2.getFeature()
          # trasformo la geometria nel crs del layer
-         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity2.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity2.layer))
          
          # plugIn, layer, feature, refresh, check_validity
          if qad_layer.updateFeatureToLayer(self.plugIn, self.entity2.layer, f, False, False) == False:
@@ -285,7 +285,7 @@ class QadFILLETCommandClass(QadCommandClass):
       if whatToDoPoly1 == 0 and whatToDoPoly2 == 0: # 0=niente      
          geom = QgsGeometry.fromPolylineXY(filletLinearObjectList.asPolyline(tolerance2ApproxCurve))
          # trasformo la geometria nel crs del layer
-         geom = fromQadGeomToQgsGeom(newQadGeom, self.entity1.crs())
+         geom = fromQadGeomToQgsGeom(newQadGeom, self.entity1.layer)
          
          # plugIn, layer, geom, coordTransform, refresh, check_validity
          if qad_layer.addGeomToLayer(self.plugIn, self.entity1.layer, geom, None, False, False) == False:

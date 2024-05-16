@@ -147,14 +147,22 @@ class Qad_pedit_maptool(QadGetPoint):
          tmpPolyline.movePoint(self.vertexAt, newPt)
       
       if tmpPolyline is not None:
-         pts = tmpPolyline.asPolyline(self.tolerance2ApproxCurve) 
-         if self.layer.geometryType() == QgsWkbTypes.PolygonGeometry:
-            geom = QgsGeometry.fromPolygonXY([pts])
+         if self.layer is not None:
+            geom = tmpPolyline.asGeom(self.layer.wkbType())
          else:
-            geom = QgsGeometry.fromPolylineXY(pts)
-            
+            geom = tmpPolyline.asGeom(QgsWkbTypes.CurvePolygon)           
+
          # trasformo la geometria nel crs del layer
          self.__highlight.addGeometry(self.mapToLayerCoordinates(self.layer, geom), self.layer)
+         
+#          pts = tmpPolyline.asPolyline(self.tolerance2ApproxCurve) 
+#          if self.layer.geometryType() == QgsWkbTypes.PolygonGeometry:
+#             geom = QgsGeometry.fromPolygonXY([pts])
+#          else:
+#             geom = QgsGeometry.fromPolylineXY(pts)
+#             
+#          # trasformo la geometria nel crs del layer
+#          self.__highlight.addGeometry(self.mapToLayerCoordinates(self.layer, geom), self.layer)
       
     
    def activate(self):
@@ -216,6 +224,7 @@ class Qad_pedit_maptool(QadGetPoint):
          self.setSnapType(QadSnapTypeEnum.DISABLE)
          self.setSelectionMode(QadGetPointSelectionModeEnum.POINT_SELECTION)   
          self.setDrawMode(QadGetPointDrawModeEnum.NONE)
+         self.setStartPoint(None)
       # si richede il punto base (grip mode)
       elif self.mode == Qad_pedit_maptool_ModeEnum.ASK_FOR_BASE_PT:
          self.setSnapType()

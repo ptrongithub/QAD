@@ -101,6 +101,11 @@ class QadPLINECommandClass(QadCommandClass):
          if self.mode == "ARC":
             if self.ArcPointMapTool is None:
                self.ArcPointMapTool = Qad_arc_maptool(self.plugIn, self.asToolForMPolygon) # se True significa che è usato per disegnare un poligono
+               if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer   
+                  currLayer, errMsg = qad_layer.getCurrLayerEditable(self.plugIn.canvas, QgsWkbTypes.LineGeometry)
+                  if currLayer is not None:
+                     self.ArcPointMapTool.layer = currLayer
+               
             return self.ArcPointMapTool
          else:
             if self.PointMapTool is None:
@@ -349,7 +354,9 @@ class QadPLINECommandClass(QadCommandClass):
                
                if self.getPointMapTool().rightButton == True: # se usato il tasto destro del mouse
                   if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, self.polyline.asPolyline())
+                     geom = self.polyline.asGeom(currLayer.wkbType())
+                     if geom is not None:
+                        qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                   return True # fine comando
                else:
                   self.setMapTool(self.getPointMapTool()) # riattivo il maptool
@@ -366,8 +373,10 @@ class QadPLINECommandClass(QadCommandClass):
                else:
                   return True # fine comando
             else:
-               if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer   
-                  qad_layer.addLineToLayer(self.plugIn, currLayer, self.polyline.asPolyline())
+               if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer
+                  geom = self.polyline.asGeom(currLayer.wkbType())
+                  if geom is not None:
+                     qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))                   
                return True # fine comando
 
          if type(value) == unicode:
@@ -395,7 +404,9 @@ class QadPLINECommandClass(QadCommandClass):
             elif value == QadMsg.translate("Command_PLINE", "Close") or value == "Close":
                self.polyline.setClose()
                if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer   
-                  qad_layer.addLineToLayer(self.plugIn, currLayer, self.polyline.asPolyline())
+                  geom = self.polyline.asGeom(currLayer.wkbType())
+                  if geom is not None:
+                     qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
             elif value == QadMsg.translate("Command_PLINE", "Trace") or value == "Trace":
                self.waitForTracePt(msgMapTool, msg)
@@ -526,7 +537,9 @@ class QadPLINECommandClass(QadCommandClass):
             if self.getPointMapTool().point is None: # il maptool é stato attivato senza un punto
                if self.getPointMapTool().rightButton == True: # se usato il tasto destro del mouse
                   if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer   
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, self.polyline.asPolyline())
+                     geom = self.polyline.asGeom(currLayer.wkbType())
+                     if geom is not None:
+                        qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                   return True # fine comando
                else:
                   self.setMapTool(self.getPointMapTool()) # riattivo il maptool
@@ -540,7 +553,9 @@ class QadPLINECommandClass(QadCommandClass):
 
          if value is None:
             if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer   
-               qad_layer.addLineToLayer(self.plugIn, currLayer, self.polyline.asPolyline())
+               geom = self.polyline.asGeom(currLayer.wkbType())
+               if geom is not None:
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
             return True # fine comando
          
          if type(value) == unicode:
@@ -573,7 +588,9 @@ class QadPLINECommandClass(QadCommandClass):
                   self.addLinearObjToPolyline(arc)
 
                   if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer   
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, self.polyline.asPolyline())
+                     geom = self.polyline.asGeom(currLayer.wkbType())
+                     if geom is not None:
+                        qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
 
                   return True # fine comando
             elif value == QadMsg.translate("Command_PLINE", "Direction") or value == "Direction":

@@ -130,7 +130,7 @@ class QadBREAKCommandClass(QadCommandClass):
                return
             brokenFeature1 = QgsFeature(f)
             # trasformo la geometria nel crs del layer
-            brokenFeature1.setGeometry(fromQadGeomToQgsGeom(updGeom, layer.crs()))
+            brokenFeature1.setGeometry(fromQadGeomToQgsGeom(updGeom, layer))
             # plugIn, layer, feature, refresh, check_validity
             if qad_layer.updateFeatureToLayer(self.plugIn, layer, brokenFeature1, False, False) == False:
                self.plugIn.destroyEditCommand()
@@ -138,7 +138,7 @@ class QadBREAKCommandClass(QadCommandClass):
          if line2 is not None:
             brokenFeature2 = QgsFeature(f)      
             # trasformo la geometria nel crs del layer
-            brokenFeature2.setGeometry(fromQadGeomToQgsGeom(line2, layer.crs()))
+            brokenFeature2.setGeometry(fromQadGeomToQgsGeom(line2, layer))
             # plugIn, layer, feature, coordTransform, refresh, check_validity
             if qad_layer.addFeatureToLayer(self.plugIn, layer, brokenFeature2, None, False, False, False) == False:
                self.plugIn.destroyEditCommand()
@@ -151,9 +151,9 @@ class QadBREAKCommandClass(QadCommandClass):
          
          lineGeoms = []
          if line1 is not None:
-            lineGeoms.append(fromQadGeomToQgsGeom(line1, layer.crs()))
+            lineGeoms.append(fromQadGeomToQgsGeom(line1, layer))
          if line2 is not None:
-            lineGeoms.append(fromQadGeomToQgsGeom(line2, layer.crs()))
+            lineGeoms.append(fromQadGeomToQgsGeom(line2, layer))
 
          # trasformo la geometria in quella dei layer temporanei
          # plugIn, pointGeoms, lineGeoms, polygonGeoms, coord, refresh
@@ -171,7 +171,7 @@ class QadBREAKCommandClass(QadCommandClass):
          else:
             brokenFeature1 = QgsFeature(f)
             # trasformo la geometria nel crs del layer
-            brokenFeature1.setGeometry(fromQadGeomToQgsGeom(updGeom, layer.crs()))
+            brokenFeature1.setGeometry(fromQadGeomToQgsGeom(updGeom, layer))
             # plugIn, layer, feature, refresh, check_validity
             if qad_layer.updateFeatureToLayer(self.plugIn, layer, brokenFeature1, False, False) == False:
                self.plugIn.destroyEditCommand()

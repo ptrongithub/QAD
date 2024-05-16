@@ -216,7 +216,7 @@ class QadLENGTHENCommandClass(QadCommandClass):
 
       updGeom = setQadGeomAt(qadGeom, newLinearObject, self.atGeom, 0)
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(updGeom, layer.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(updGeom, layer))
          
       self.plugIn.beginEditCommand("Feature edited", layer)
       
@@ -905,7 +905,7 @@ class QadGRIPLENGTHENCommandClass(QadCommandClass):
       
       updGeom = setQadGeomAt(qadGeom, newLinearObject, self.atGeom, 0)
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(updGeom, layer.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(updGeom, layer))
          
       self.plugIn.beginEditCommand("Feature edited", layer)
       

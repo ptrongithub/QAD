@@ -111,6 +111,7 @@ class Qad_pline_maptool(QadGetPoint):
       
       if self.mode == Qad_pline_maptool_ModeEnum.ASK_FOR_TRACE_PT:
          if (points is not None): self.__polylineTraceRubberBand.setLine(points)
+      
       # caso di poligono
       if self.asToolForMPolygon:
          if (points is not None) and (self.endVertex is not None) and (startPoint != self.endVertex):

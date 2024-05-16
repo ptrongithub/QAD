@@ -88,7 +88,7 @@ class Qad_scale_maptool(QadGetPoint):
          # scalo la geometria dell'entità
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.scale(basePt, scale)
-         self.__highlight.addGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()), entity.layer)
+         self.__highlight.addGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer), entity.layer)
       elif entity.whatIs() == "DIMENTITY":
          newDimEntity = QadDimEntity(entity) # la copio
          # scalo la quota

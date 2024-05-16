@@ -146,7 +146,7 @@ class QadEXTENDCommandClass(QadCommandClass):
                      # aggiorno la feature con la geometria estesa
                      extendedFeature = QgsFeature(f)
                      # trasformo la geometria nel crs del layer
-                     extendedFeature.setGeometry(fromQadGeomToQgsGeom(newGeom, entity.crs()))
+                     extendedFeature.setGeometry(fromQadGeomToQgsGeom(newGeom, layer))
                      # plugIn, layer, feature, refresh, check_validity
                      if qad_layer.updateFeatureToLayer(self.plugIn, layer, extendedFeature, False, False) == False:
                         self.plugIn.destroyEditCommand()
@@ -167,7 +167,7 @@ class QadEXTENDCommandClass(QadCommandClass):
                            
                         trimmedFeature1 = QgsFeature(f)
                         # trasformo la geometria nel crs del layer
-                        trimmedFeature1.setGeometry(fromQadGeomToQgsGeom(newQadGeom, entity.crs()))
+                        trimmedFeature1.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
                         # plugIn, layer, feature, refresh, check_validity
                         if qad_layer.updateFeatureToLayer(self.plugIn, layer, trimmedFeature1, False, False) == False:
                            self.plugIn.destroyEditCommand()
@@ -175,7 +175,7 @@ class QadEXTENDCommandClass(QadCommandClass):
                         if line2 is not None:
                            trimmedFeature2 = QgsFeature(f)      
                            # trasformo la geometria nel crs del layer
-                           trimmedFeature2.setGeometry(fromQadGeomToQgsGeom(line2, entity.crs()))
+                           trimmedFeature2.setGeometry(fromQadGeomToQgsGeom(line2, layer))
                            # plugIn, layer, feature, coordTransform, refresh, check_validity
                            if qad_layer.addFeatureToLayer(self.plugIn, layer, trimmedFeature2, None, False, False, False) == False:
                               self.plugIn.destroyEditCommand()
@@ -205,7 +205,7 @@ class QadEXTENDCommandClass(QadCommandClass):
                         else:
                            trimmedFeature1 = QgsFeature(f)
                            # trasformo la geometria nel crs del layer
-                           trimmedFeature1.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()))
+                           trimmedFeature1.setGeometry(fromQadGeomToQgsGeom(qadGeom, layer))
                            # plugIn, layer, feature, refresh, check_validity
                            if qad_layer.updateFeatureToLayer(self.plugIn, layer, trimmedFeature1, False, False) == False:
                               self.plugIn.destroyEditCommand()

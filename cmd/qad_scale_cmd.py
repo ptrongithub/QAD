@@ -111,7 +111,7 @@ class QadSCALECommandClass(QadCommandClass):
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.scale(basePt, scale)
          f = entity.getFeature()
-         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer))
          
          sizeFldName = None
          if entity.isTextualLayer:
@@ -576,7 +576,7 @@ class QadGRIPSCALECommandClass(QadCommandClass):
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.scale(basePt, scale)
          f = entity.getFeature()
-         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer))
 
          sizeFldName = None
          if entity.isTextualLayer:

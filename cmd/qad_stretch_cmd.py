@@ -129,7 +129,7 @@ class QadSTRETCHCommandClass(QadCommandClass):
          if stretchedGeom is not None:
             # trasformo la geometria nel crs del layer
             f = entity.getFeature()
-            f.setGeometry(fromQadGeomToQgsGeom(stretchedGeom, entity.crs()))
+            f.setGeometry(fromQadGeomToQgsGeom(stretchedGeom, entity.layer))
             # plugIn, layer, feature, refresh, check_validity
             if qad_layer.updateFeatureToLayer(self.plugIn, entity.layer, f, False, False) == False:
                return False
@@ -687,7 +687,7 @@ class QadGRIPSTRETCHCommandClass(QadCommandClass):
          if stretchedGeom is not None:
             # trasformo la geometria QAD in geometria GSIS nel crs del layer
             f = entity.getFeature()
-            f.setGeometry(fromQadGeomToQgsGeom(stretchedGeom, entity.crs()))
+            f.setGeometry(fromQadGeomToQgsGeom(stretchedGeom, entity.layer))
             if self.copyEntities == False:
                # plugIn, layer, feature, refresh, check_validity
                if qad_layer.updateFeatureToLayer(self.plugIn, entity.layer, f, False, False) == False:

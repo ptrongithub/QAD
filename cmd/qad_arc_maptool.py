@@ -23,12 +23,14 @@
 """
 
 
-from qgis.core import QgsCoordinateTransform, QgsGeometry, QgsProject
+from qgis.core import QgsCoordinateTransform, QgsGeometry, QgsProject, QgsWkbTypes
 
 
 from .. import qad_utils
 from ..qad_variables import QadVariables
 from ..qad_getpoint import QadGetPoint, QadGetPointDrawModeEnum
+from ..qad_line import QadLine
+from ..qad_polyline import QadPolyline
 from ..qad_arc import QadArc
 from ..qad_rubberband import QadRubberBand
 from ..qad_highlight import QadHighlight
@@ -107,6 +109,8 @@ class Qad_arc_maptool(QadGetPoint):
          self.endVertex = None # punta al vertice iniziale e finale del poligono di QadPLINECommandClass
       else:
          self.__polygonRubberBand = None
+         
+      self.layer = None
 
 
    def hidePointMapToolMarkers(self):
@@ -222,14 +226,37 @@ class Qad_arc_maptool(QadGetPoint):
             arc.inverseAngles()
       
       if result == True:
-         points = arc.asPolyline()
-      
-         if points is not None:
-            self.__rubberBand.setLine(points)
-            if self.__polygonRubberBand is not None: # significa che è usato per disegnare un poligono
-               if self.endVertex is not None:
-                  points.insert(0, self.endVertex)
-                  self.__polygonRubberBand.setPolygon(points)
+         if self.__polygonRubberBand is None: # significa che NON è usato per disegnare un poligono
+            if self.layer is not None:
+               g = arc.asGeom(self.layer.wkbType())
+            else:
+               g = arc.asGeom(QgsWkbTypes.CompoundCurve) # è un arco virtuale che non verrà salvato da questo comando
+
+            if g is not None: self.__rubberBand.setGeometry(g) 
+         else: # significa che è usato per disegnare un poligono
+            pline = QadPolyline()
+            pline.append(arc)
+            line = QadLine()
+            line.set(arc.getEndPt(), self.endVertex)
+            pline.append(line)
+            line = QadLine()
+            line.set(self.endVertex, arc.getStartPt())
+            pline.append(line)
+            if self.layer is not None:
+               g = pline.asGeom(self.layer.wkbType())
+            else:
+               g = pline.asGeom(QgsWkbTypes.CurvePolygon) # è un arco virtuale che non verrà salvato da questo comando            
+            
+            self.__polygonRubberBand.setGeometry(g)
+                                 
+#          points = arc.asPolyline()
+#       
+#          if points is not None:
+#             self.__rubberBand.setLine(points)
+#             if self.__polygonRubberBand is not None: # significa che è usato per disegnare un poligono
+#                if self.endVertex is not None:
+#                   points.insert(0, self.endVertex)
+#                   self.__polygonRubberBand.setPolygon(points)
 
     
    def activate(self):

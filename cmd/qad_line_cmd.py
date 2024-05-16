@@ -29,6 +29,7 @@ from qgis.core import QgsWkbTypes, QgsGeometry, QgsCoordinateTransform
 
 
 from ..qad_getpoint import QadGetPointDrawModeEnum
+from ..qad_line import QadLine
 from .qad_line_maptool import Qad_line_maptool, Qad_line_maptool_ModeEnum
 from .qad_generic_cmd import QadCommandClass
 from ..qad_msg import QadMsg
@@ -131,10 +132,13 @@ class QadLINECommandClass(QadCommandClass):
 
    def addLinesToLayer(self, layer):
       i = 1
-      while i < len(self.vertices):                     
-         qad_layer.addLineToLayer(self.plugIn, layer,
-                                  [self.vertices[i - 1], self.vertices[i]], True, True, False, \
-                                  True if len(self.vertices) == 2 else False)
+      line = QadLine()
+      while i < len(self.vertices):
+         line.set(self.vertices[i - 1], self.vertices[i])
+         geom = line.asGeom(layer.wkbType())
+         if geom is not None:
+            qad_layer.addGeomToLayer(self.plugIn, layer, self.mapToLayerCoordinates(layer, geom), None, True, False, \
+                                     True if len(self.vertices) == 2 else False)
          i = i + 1
 
 
@@ -252,17 +256,17 @@ class QadLINECommandClass(QadCommandClass):
                      result = getQadGeomClosestPart(entity.getQadGeom(), value)
                      secondQadGeomPart = getQadGeomPartAt(entity.getQadGeom(), result[2], result[3], result[4])
                                              
-                     tangent = QadTangency.bestTwoBasicGeomObjects(firstQadGeomPart, self.firstPtTan, secondQadGeomPart, value)
+                     tangent = QadTangency.bestTwoBasicGeomObjects(self.firstQadGeomPart, self.firstPtTan, secondQadGeomPart, value)
                      if tangent is not None:
                         # prendo il punto più vicino a valueself.firstEntity
-                        if qad_utils.getDistance(tangent[0], value) < qad_utils.getDistance(tangent[1], value):                              
-                           self.addVertex(tangent[1]) # aggiungo un nuovo vertice
-                           self.addVertex(tangent[0]) # aggiungo un nuovo vertice
-                           self.getPointMapTool().firstPt = tangent[0]
+                        if qad_utils.getDistance(tangent.getStartPt(), value) < qad_utils.getDistance(tangent.getEndPt(), value):                              
+                           self.addVertex(tangent.getEndPt()) # aggiungo un nuovo vertice
+                           self.addVertex(tangent.getStartPt()) # aggiungo un nuovo vertice
+                           self.getPointMapTool().firstPt = tangent.getStartPt()
                         else:
-                           self.addVertex(tangent[0]) # aggiungo un nuovo vertice
-                           self.addVertex(tangent[1]) # aggiungo un nuovo vertice
-                           self.getPointMapTool().firstPt = tangent[1]
+                           self.addVertex(tangent.getStartPt()) # aggiungo un nuovo vertice
+                           self.addVertex(tangent.getEndPt()) # aggiungo un nuovo vertice
+                           self.getPointMapTool().firstPt = tangent.getEndPt()
                         # imposto il map tool
                         self.getPointMapTool().setMode(Qad_line_maptool_ModeEnum.FIRST_PT_KNOWN_ASK_FOR_SECOND_PT)         
                      else:
@@ -273,7 +277,7 @@ class QadLINECommandClass(QadCommandClass):
                      result = getQadGeomClosestPart(entity.getQadGeom(), value)
                      secondQadGeomPart = getQadGeomPartAt(entity.getQadGeom(), result[2], result[3], result[4])
                      
-                     tangent = QadTangPerp.bestTwoBasicGeomObjects(secondQadGeomPart, value, firstQadGeomPart, self.firstPtPer)
+                     tangent = QadTangPerp.bestTwoBasicGeomObjects(secondQadGeomPart, value, self.firstQadGeomPart, self.firstPtPer)
                      if tangent is not None:
                         # prendo il punto più vicino a value
                         if qad_utils.getDistance(tangent.getStartPt(), value) < qad_utils.getDistance(tangent.getEndPt(), value):                              

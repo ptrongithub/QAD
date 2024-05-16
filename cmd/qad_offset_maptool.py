@@ -34,6 +34,7 @@ from ..qad_dim import QadDimStyles
 from ..qad_msg import QadMsg
 from ..qad_offset_fun import offsetPolyline, offsetQGSGeom
 from ..qad_geom_relations import getQadGeomClosestPart
+from ..qad_multi_geom import fromQgsGeomToQadGeom
 
 
 #===============================================================================
@@ -142,6 +143,8 @@ class Qad_offset_maptool(QadGetPoint):
                                         forcedOffsetDist)
       
       for g in offsetQGSGeomList:
+         # converto in QAD geometry per riconoscere le curve
+         g = fromQgsGeomToQadGeom(g).asGeom(self.layer.wkbType())        
          self.__highlight.addGeometry(self.mapToLayerCoordinates(self.layer, g), self.layer)
                   
 #       lines = offsetPolyline(self.subGeom, \

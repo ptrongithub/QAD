@@ -87,11 +87,9 @@ class QadPOLYGONCommandClass(QadCommandClass):
 
       
    def addPolygonToLayer(self, layer):
-      vertices = self.polyline.asPolyline()
-      if layer.geometryType() == QgsWkbTypes.LineGeometry:
-         qad_layer.addLineToLayer(self.plugIn, layer, vertices)
-      elif layer.geometryType() == QgsWkbTypes.PolygonGeometry:                          
-         qad_layer.addPolygonToLayer(self.plugIn, layer, vertices)
+      geom = self.polyline.asGeom(layer.wkbType())
+      if geom is not None:
+         qad_layer.addGeomToLayer(self.plugIn, layer, self.mapToLayerCoordinates(layer, geom))
       
 
    #============================================================================

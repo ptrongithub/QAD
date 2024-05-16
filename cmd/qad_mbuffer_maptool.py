@@ -95,7 +95,7 @@ class Qad_mbuffer_maptool(QadGetPoint):
                bufferedQadGeom = buffer(entity.getQadGeom(), width)
                if bufferedQadGeom is not None:
                   # trasformo la geometria nel crs del layer
-                  self.__rubberBand.addGeometry(fromQadGeomToQgsGeom(bufferedQadGeom, entity.crs()), entity.layer)
+                  self.__rubberBand.addGeometry(fromQadGeomToQgsGeom(bufferedQadGeom, entity.layer), entity.layer)
                            
     
    def activate(self):

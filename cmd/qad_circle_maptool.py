@@ -83,8 +83,9 @@ class Qad_circle_maptool(QadGetPoint):
       self.startPtForRadius = None
             
       self.__rubberBand = QadRubberBand(self.canvas, False)
-      self.geomType = QgsWkbTypes.PolygonGeometry
+      self.layer = None
       self.mode = None
+
 
    def setRubberBandColor(self, rubberBandBorderColor, rubberBandFillColor):
       if rubberBandBorderColor is not None:
@@ -137,14 +138,14 @@ class Qad_circle_maptool(QadGetPoint):
                                           self.tanGeom2, self.tanPt2, radius)
       
       if circle is not None:
-         points = circle.asPolyline()
-      
-         if points is not None:
-            if self.geomType == QgsWkbTypes.PolygonGeometry:
-               self.__rubberBand.setPolygon(points)
-            else:
-               self.__rubberBand.setLine(points)
-
+         if self.layer is not None:
+            g = circle.asGeom(self.layer.wkbType())
+         else:
+            g = circle.asGeom(QgsWkbTypes.CompoundCurve) # è un cerchio virtuale che non verrà salvato da questo comando
+            
+         if g is not None:
+            self.__rubberBand.setGeometry(g)
+               
                       
    def activate(self):
       QadGetPoint.activate(self)

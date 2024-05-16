@@ -182,7 +182,7 @@ class Qad_fillet_maptool(QadGetPoint):
                newQadGeom = setQadGeomAt(tmpQadGeom, tmpSubQadGeom, tmpAtGeom, tmpAtSubGeom)
 
       if newQadGeom is not None:
-         self.__rubberBand.addGeometry(fromQadGeomToQgsGeom(newQadGeom, self.tmpEntity.crs()), self.tmpEntity.layer)
+         self.__rubberBand.addGeometry(fromQadGeomToQgsGeom(newQadGeom, self.tmpEntity.layer), self.tmpEntity.layer)
       
     
    def activate(self):

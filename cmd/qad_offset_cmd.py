@@ -40,7 +40,7 @@ from .. import qad_layer
 from ..qad_rubberband import createRubberBand
 from ..qad_offset_fun import offsetPolyline, offsetQGSGeom
 from ..qad_geom_relations import getQadGeomClosestPart
-from ..qad_multi_geom import getQadGeomAt
+from ..qad_multi_geom import getQadGeomAt, fromQgsGeomToQadGeom
 
 
 # Classe che gestisce il comando OFFSET
@@ -200,6 +200,9 @@ class QadOFFSETCommandClass(QadCommandClass):
 
       added = False
       for g in offsetQGSGeomList:
+         # converto in QAD geometry per riconoscere le curve
+         g = fromQgsGeomToQadGeom(g).asGeom(layer.wkbType())        
+         
          if g.type() == QgsWkbTypes.LineGeometry or g.type() == QgsWkbTypes.PolygonGeometry:           
             offsetFeature = QgsFeature(f)
             # trasformo la geometria nel crs del layer

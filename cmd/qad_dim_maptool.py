@@ -248,13 +248,15 @@ class Qad_dim_maptool(QadGetPoint):
          self.setStartPoint(self.dimPt1)
       # noto i punti di quotatura si richiede la posizione della linea di quota
       elif self.mode == Qad_dim_maptool_ModeEnum.FIRST_SECOND_PT_KNOWN_ASK_FOR_LINEAR_DIM_LINE_POS:
-         self.setDrawMode(QadGetPointDrawModeEnum.NONE)         
+         self.setDrawMode(QadGetPointDrawModeEnum.NONE)
+         self.setStartPoint(None)        
       # si richiede il testo di quota
       elif self.mode == Qad_dim_maptool_ModeEnum.ASK_FOR_TEXT:     
          self.setDrawMode(QadGetPointDrawModeEnum.NONE)         
       # noti i punti di quotatura si richiede la posizione della linea di quota allineata
       elif self.mode == Qad_dim_maptool_ModeEnum.FIRST_SECOND_PT_KNOWN_ASK_FOR_ALIGNED_DIM_LINE_POS:
          self.setDrawMode(QadGetPointDrawModeEnum.NONE)
+         self.setStartPoint(None) 
       # si richiede un punto sull'arco per la quota arco
       elif self.mode == Qad_dim_maptool_ModeEnum.ASK_FOR_PARTIAL_ARC_PT_FOR_DIM_ARC:
          self.setDrawMode(QadGetPointDrawModeEnum.NONE)

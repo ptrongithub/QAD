@@ -128,10 +128,12 @@ class QadMPOLYGONCommandClass(QadCommandClass):
                # se la polilinea non è chiusa
                if polyline.isClosed() == False:
                   polyline.append(QadLine().set(polyline.getEndPt(), polyline.getStartPt())) # la chiudo con un segmento retto
-               if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer                  
-                  if qad_layer.addPolygonToLayer(self.plugIn, currLayer, polyline.asPolyline(), True, True, True) == False:                     
-                     self.showMsg(QadMsg.translate("Command_MPOLYGON", "\nPolygon not valid.\n"))
-                     del polyline
+               if self.virtualCmd == False: # se si vuole veramente salvare la polylinea in un layer 
+                  geom = polyline.asGeom(currLayer.wkbType())
+                  if geom is not None:
+                     if qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom), None, True, True, True) == False:                     
+                        self.showMsg(QadMsg.translate("Command_MPOLYGON", "\nPolygon not valid.\n"))
+                        del polyline                     
             else:
                self.showMsg(QadMsg.translate("Command_MPOLYGON", "\nPolygon not valid.\n"))
                                         

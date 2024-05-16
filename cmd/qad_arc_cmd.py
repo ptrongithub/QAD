@@ -236,8 +236,8 @@ class QadARCCommandClass(QadCommandClass):
          arc = QadArc()         
          if arc.fromStartSecondEndPts(self.startPt, self.secondPt, self.endPt) == True:
             self.plugIn.setLastPoint(arc.getEndPt())
-            points = arc.asPolyline()
-            if points is not None:
+            geom = arc.asGeom(currLayer.wkbType())
+            if geom is not None:
                # se i punti sono così vicini da essere considerati uguali
                if qad_utils.ptNear(self.startPt, arc.getStartPt()):
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnEndPt())
@@ -245,8 +245,8 @@ class QadARCCommandClass(QadCommandClass):
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnStartPt() + math.pi)
                   
                self.getPointMapTool().setPolarAngOffset(self.plugIn.lastSegmentAng)
-                  
-               qad_layer.addLineToLayer(self.plugIn, currLayer, points)               
+               
+               qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
       
          # si appresta ad attendere un punto
@@ -350,19 +350,20 @@ class QadARCCommandClass(QadCommandClass):
                   arc.inverseAngles()
                
                self.plugIn.setLastPoint(arc.getEndPt())
-               points = arc.asPolyline()
-               if points is not None:
+
+               geom = arc.asGeom(currLayer.wkbType())
+               if geom is not None:
                   # se i punti sono così vicini da essere considerati uguali
                   if qad_utils.ptNear(self.startPt, arc.getStartPt()):
                      self.plugIn.setLastSegmentAng(arc.getTanDirectionOnEndPt())
                   else:
                      self.plugIn.setLastSegmentAng(arc.getTanDirectionOnStartPt() + math.pi)
-
+                     
                   self.getPointMapTool().setPolarAngOffset(self.plugIn.lastSegmentAng)
                   
-                  qad_layer.addLineToLayer(self.plugIn, currLayer, points)               
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                   return True # fine comando
-            
+                           
             keyWords = QadMsg.translate("Command_ARC", "Angle") + "/" + \
                        QadMsg.translate("Command_ARC", "chord Length")
             prompt = QadMsg.translate("Command_ARC", "Specify the final point of the arc (hold Ctrl to switch direction) or [{0}]: ").format(keyWords)
@@ -410,19 +411,19 @@ class QadARCCommandClass(QadCommandClass):
                arc.inverseAngles()
                
             self.plugIn.setLastPoint(arc.getEndPt())
-            points = arc.asPolyline()
-            if points is not None:
+            geom = arc.asGeom(currLayer.wkbType())
+            if geom is not None:
                # se i punti sono così vicini da essere considerati uguali
                if qad_utils.ptNear(self.startPt, arc.getStartPt()):
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnEndPt())
                else:
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnStartPt() + math.pi)
-
+                  
                self.getPointMapTool().setPolarAngOffset(self.plugIn.lastSegmentAng)
                
-               qad_layer.addLineToLayer(self.plugIn, currLayer, points)               
+               qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
-
+            
          # si appresta ad attendere un punto o un numero reale         
          # msg, inputType, default, keyWords, valori nulli non ammessi
          self.waitFor(QadMsg.translate("Command_ARC", "Specify the included angle (hold Ctrl to switch direction): "), \
@@ -465,17 +466,17 @@ class QadARCCommandClass(QadCommandClass):
                arc.inverseAngles()
 
             self.plugIn.setLastPoint(arc.getEndPt())
-            points = arc.asPolyline()
-            if points is not None:
+            geom = arc.asGeom(currLayer.wkbType())
+            if geom is not None:
                # se i punti sono così vicini da essere considerati uguali
                if qad_utils.ptNear(self.startPt, arc.getStartPt()):
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnEndPt())
                else:
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnStartPt() + math.pi)
-
+                  
                self.getPointMapTool().setPolarAngOffset(self.plugIn.lastSegmentAng)
                
-               qad_layer.addLineToLayer(self.plugIn, currLayer, points)               
+               qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
 
          # si appresta ad attendere un punto o un numero reale         
@@ -593,19 +594,19 @@ class QadARCCommandClass(QadCommandClass):
                   arc.inverseAngles()
                   
                self.plugIn.setLastPoint(arc.getEndPt())
-               points = arc.asPolyline()
-               if points is not None:
+               geom = arc.asGeom(currLayer.wkbType())
+               if geom is not None:
                   # se i punti sono così vicini da essere considerati uguali
                   if qad_utils.ptNear(self.startPt, arc.getStartPt()):
                      self.plugIn.setLastSegmentAng(arc.getTanDirectionOnEndPt())
                   else:
                      self.plugIn.setLastSegmentAng(arc.getTanDirectionOnStartPt() + math.pi)
-
+                     
                   self.getPointMapTool().setPolarAngOffset(self.plugIn.lastSegmentAng)
                   
-                  qad_layer.addLineToLayer(self.plugIn, currLayer, points)               
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                   return True # fine comando
-            
+                           
             keyWords = QadMsg.translate("Command_ARC", "Angle") + "/" + \
                        QadMsg.translate("Command_ARC", "Direction") + "/" + \
                        QadMsg.translate("Command_ARC", "Radius")
@@ -655,17 +656,17 @@ class QadARCCommandClass(QadCommandClass):
                arc.inverseAngles()
                
             self.plugIn.setLastPoint(arc.getEndPt())
-            points = arc.asPolyline()
-            if points is not None:
+            geom = arc.asGeom(currLayer.wkbType())
+            if geom is not None:
                # se i punti sono così vicini da essere considerati uguali
                if qad_utils.ptNear(self.startPt, arc.getStartPt()):
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnEndPt())
                else:
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnStartPt() + math.pi)
-
+                  
                self.getPointMapTool().setPolarAngOffset(self.plugIn.lastSegmentAng)
                
-               qad_layer.addLineToLayer(self.plugIn, currLayer, points)               
+               qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
 
          # si appresta ad attendere un punto o un numero reale         
@@ -709,17 +710,17 @@ class QadARCCommandClass(QadCommandClass):
                arc.inverseAngles()
                
             self.plugIn.setLastPoint(arc.getEndPt())
-            points = arc.asPolyline()
-            if points is not None:
+            geom = arc.asGeom(currLayer.wkbType())
+            if geom is not None:
                # se i punti sono così vicini da essere considerati uguali
                if qad_utils.ptNear(self.startPt, arc.getStartPt()):
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnEndPt())
                else:
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnStartPt() + math.pi)
-
+                  
                self.getPointMapTool().setPolarAngOffset(self.plugIn.lastSegmentAng)
                
-               qad_layer.addLineToLayer(self.plugIn, currLayer, points)               
+               qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
 
          # si appresta ad attendere un punto o un numero reale         
@@ -765,17 +766,17 @@ class QadARCCommandClass(QadCommandClass):
                arc.inverseAngles()
                
             self.plugIn.setLastPoint(arc.getEndPt())
-            points = arc.asPolyline()
-            if points is not None:
+            geom = arc.asGeom(currLayer.wkbType())
+            if geom is not None:
                # se i punti sono così vicini da essere considerati uguali
                if qad_utils.ptNear(self.startPt, arc.getStartPt()):
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnEndPt())
                else:
                   self.plugIn.setLastSegmentAng(arc.getTanDirectionOnStartPt() + math.pi)
-
+                  
                self.getPointMapTool().setPolarAngOffset(self.plugIn.lastSegmentAng)
                
-               qad_layer.addLineToLayer(self.plugIn, currLayer, points)               
+               qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
 
          # si appresta ad attendere un punto o un numero reale         

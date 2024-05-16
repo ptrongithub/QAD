@@ -386,12 +386,19 @@ class QadELLIPSECommandClass(QadCommandClass):
          return True # fine comando
 
       currLayer = None
-      if self.virtualCmd == False: # se si vuole veramente salvare l'ellisse in un layer   
-         # il layer corrente deve essere editabile e di tipo linea o poligono
-         currLayer, errMsg = qad_layer.getCurrLayerEditable(self.plugIn.canvas, [QgsWkbTypes.LineGeometry, QgsWkbTypes.PolygonGeometry])
-         if currLayer is None:
-            self.showErr(errMsg)
-            return True # fine comando
+      if self.virtualCmd == False: # se si vuole veramente salvare l'ellisse in un layer
+         if self.arc == True:
+            # il layer corrente deve essere editabile e di tipo linea
+            currLayer, errMsg = qad_layer.getCurrLayerEditable(self.plugIn.canvas, [QgsWkbTypes.LineGeometry])
+            if currLayer is None:
+               self.showErr(errMsg)
+               return True # fine comando
+         else:
+            # il layer corrente deve essere editabile e di tipo linea o poligono
+            currLayer, errMsg = qad_layer.getCurrLayerEditable(self.plugIn.canvas, [QgsWkbTypes.LineGeometry, QgsWkbTypes.PolygonGeometry])
+            if currLayer is None:
+               self.showErr(errMsg)
+               return True # fine comando
          self.getPointMapTool().geomType = QgsWkbTypes.LineGeometry if currLayer.geometryType() == QgsWkbTypes.LineGeometry else QgsWkbTypes.PolygonGeometry
          
       if self.step == 0:     
@@ -506,13 +513,10 @@ class QadELLIPSECommandClass(QadCommandClass):
 
             if self.ellipse.fromAxis1FinalPtsAxis2Len(self.axis1Pt2, self.axis1Pt1, self.distToOtherAxis) is not None:
                if self.arc == False: # se si vuole disegnare un'ellisse intera
-                  points = self.ellipse.asPolyline()
-                  if points is not None:
-                     if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                        if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                           qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                        else:
-                           qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+                  geom = self.ellipse.asGeom(currLayer.wkbType())
+                  if geom is not None:
+                     if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                        qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                      return True # fine comando
                else: # se si vuole disegnare un arco di ellisse
                   self.waitForStartAngle()
@@ -548,13 +552,10 @@ class QadELLIPSECommandClass(QadCommandClass):
 
             if self.ellipse.fromAxis1FinalPtsAxis2Len(self.axis1Pt2, self.axis1Pt1, self.distToOtherAxis) is not None:
                if self.arc == False: # se si vuole disegnare un'ellisse intera
-                  points = self.ellipse.asPolyline()
-                  if points is not None:
-                     if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                        if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                           qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                        else:
-                           qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+                  geom = self.ellipse.asGeom(currLayer.wkbType())
+                  if geom is not None:
+                     if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                        qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                      return True # fine comando
                else: # se si vuole disegnare un arco di ellisse
                   self.waitForStartAngle()
@@ -573,13 +574,10 @@ class QadELLIPSECommandClass(QadCommandClass):
 
          if self.ellipse.fromAxis1FinalPtsArea(self.axis1Pt2, self.axis1Pt1, value) is not None:
             if self.arc == False: # se si vuole disegnare un'ellisse intera
-               points = self.ellipse.asPolyline()
-               if points is not None:
-                  if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                     if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                        qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                     else:
-                        qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+               geom = self.ellipse.asGeom(currLayer.wkbType())
+               if geom is not None:
+                  if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                     qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                   return True # fine comando
             else: # se si vuole disegnare un arco di ellisse
                self.waitForStartAngle()
@@ -649,13 +647,10 @@ class QadELLIPSECommandClass(QadCommandClass):
                self.endAngle = value
 
             self.ellipseArc.set(self.ellipse.center, self.ellipse.majorAxisFinalPt, self.ellipse.axisRatio, self.startAngle, self.endAngle)
-            points = self.ellipseArc.asPolyline()
-            if points is not None:
-               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                  if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                  else:
-                     qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+            geom = self.ellipseArc.asGeom(currLayer.wkbType())
+            if geom is not None:
+               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
            
          elif type(value) == unicode:
@@ -693,13 +688,10 @@ class QadELLIPSECommandClass(QadCommandClass):
                self.endAngle = self.startAngle + value
             
             self.ellipseArc.set(self.ellipse.center, self.ellipse.majorAxisFinalPt, self.ellipse.axisRatio, self.startAngle, self.endAngle)
-            points = self.ellipseArc.asPolyline()
-            if points is not None:
-               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                  if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                  else:
-                     qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+            geom = self.ellipseArc.asGeom(currLayer.wkbType())
+            if geom is not None:
+               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
          
          return False
@@ -766,13 +758,10 @@ class QadELLIPSECommandClass(QadCommandClass):
                self.endAngle = self.ellipse.getAngleFromParam(value)
 
             self.ellipseArc.set(self.ellipse.center, self.ellipse.majorAxisFinalPt, self.ellipse.axisRatio, self.startAngle, self.endAngle)
-            points = self.ellipseArc.asPolyline()
-            if points is not None:
-               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                  if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                  else:
-                     qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+            geom = self.ellipseArc.asGeom(currLayer.wkbType())
+            if geom is not None:
+               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
            
          elif type(value) == unicode:
@@ -890,14 +879,11 @@ class QadELLIPSECommandClass(QadCommandClass):
             
             if self.ellipse.fromFoci(self.focus1, self.focus2, value) is not None:
                if self.arc == False: # se si vuole disegnare un'ellisse intera
-                  points = self.ellipse.asPolyline()
-                  if points is not None:
-                     if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                        if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                           qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                        else:
-                           qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
-                     return True # fine comando
+                  geom = self.ellipse.asGeom(currLayer.wkbType())
+                  if geom is not None:
+                     if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                        qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
+                     return True # fine comando                  
                else: # se si vuole disegnare un arco di ellisse
                   self.waitForStartAngle()
          

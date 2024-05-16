@@ -76,7 +76,7 @@ class Qad_move_maptool(QadGetPoint):
          # sposto la geometria dell'entità
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.move(offsetX, offsetY)
-         self.__highlight.addGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()), entity.layer)
+         self.__highlight.addGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer), entity.layer)
       elif entity.whatIs() == "DIMENTITY":
          newDimEntity = QadDimEntity(entity) # la copio
          # sposto la quota

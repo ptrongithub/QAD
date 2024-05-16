@@ -104,7 +104,7 @@ class QadCIRCLECommandClass(QadCommandClass):
          if currLayer is None:
             self.showErr(errMsg)
             return True # fine comando
-         self.getPointMapTool().geomType = QgsWkbTypes.LineGeometry if currLayer.geometryType() == QgsWkbTypes.LineGeometry else QgsWkbTypes.PolygonGeometry                                   
+         self.getPointMapTool().layer = currLayer
 
       #=========================================================================
       # RICHIESTA PRIMO PUNTO o CENTRO
@@ -249,13 +249,10 @@ class QadCIRCLECommandClass(QadCommandClass):
 
             circle = QadCircle()
             if circle.set(self.centerPt, self.radius) is not None:
-               points = circle.asPolyline()
-               if points is not None:
+               geom = circle.asGeom(currLayer.wkbType())
+               if geom is not None:
                   if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
-                     if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                        qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                     else:
-                        qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+                     qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                   return True # fine comando
             
             keyWords = QadMsg.translate("Command_CIRCLE", "Diameter") + "/" + \
@@ -301,15 +298,12 @@ class QadCIRCLECommandClass(QadCommandClass):
       
          circle = QadCircle()         
          if circle.set(self.centerPt, self.radius) is not None:
-            points = circle.asPolyline()
-            if points is not None:
-               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                  if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                  else:
-                     qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+            geom = circle.asGeom(currLayer.wkbType())
+            if geom is not None:
+               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                return True # fine comando
-      
+                  
          # si appresta ad attendere un punto o un numero reale   
          # msg, inputType, default, keyWords, valori positivi
          self.waitFor(QadMsg.translate("Command_CIRCLE", "Specify the circle diameter: "), \
@@ -508,16 +502,15 @@ class QadCIRCLECommandClass(QadCommandClass):
                   circle = circleFrom3Pts(self.firstPt, self.secondPt, value)
                      
          if circle is not None:
-            points = circle.asPolyline()
             self.centerPt = circle.center
-            self.radius = circle.radius           
-            if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-               if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                  qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-               else:
-                  qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
-            return True # fine comando
-         
+            self.radius = circle.radius
+            
+            geom = circle.asGeom(currLayer.wkbType())
+            if geom is not None:
+               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
+               return True # fine comando
+                          
          # si appresta ad attendere un punto
          self.waitForPoint(QadMsg.translate("Command_CIRCLE", "Specify the third point on the circle: "))
          self.isValidPreviousInput = False # per gestire il comando anche in macro     
@@ -612,16 +605,15 @@ class QadCIRCLECommandClass(QadCommandClass):
                circle = QadCircle().fromDiamEnds(self.firstDiamPt, self.secondDiamPt)
                   
          if circle is not None:
-            points = circle.asPolyline()
             self.centerPt = circle.center
             self.radius = circle.radius
-            if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-               if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                  qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-               else:
-                  qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)             
-            return True # fine comand         
-         
+            
+            geom = circle.asGeom(currLayer.wkbType())
+            if geom is not None:
+               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
+               return True # fine comando
+                     
          # si appresta ad attendere un punto
          self.waitForPoint(QadMsg.translate("Command_CIRCLE", "Specify second end of the circle diameter: "))
          self.isValidPreviousInput = False # per gestire il comando anche in macro     
@@ -773,15 +765,12 @@ class QadCIRCLECommandClass(QadCommandClass):
             circle = circleFrom2TanPtsRadius(self.tanGeom1, self.tanPt1, \
                                              self.tanGeom2, self.tanPt2, value)
             if circle is not None:
-               points = circle.asPolyline()
-               if points is not None:
+               geom = circle.asGeom(currLayer.wkbType())
+               if geom is not None:
                   self.centerPt = circle.center
                   self.radius = circle.radius
-                  if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                     if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                        qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                     else:
-                        qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+                  if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                     qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
                else:
                   self.showMsg(QadMsg.translate("Command_CIRCLE", "\nThe circle doesn't exist."))
             else:
@@ -814,15 +803,12 @@ class QadCIRCLECommandClass(QadCommandClass):
          circle = circleFrom2TanPtsRadius(self.tanGeom1, self.tanPt1, \
                                            self.tanGeom2, self.tanPt2, self.radius)
          if circle is not None:
-            points = circle.asPolyline()
-            if points is not None:
+            geom = circle.asGeom(currLayer.wkbType())
+            if geom is not None:
                self.centerPt = circle.center
                self.radius = circle.radius
-               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                  if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                  else:
-                     qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
+               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                  qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
             else:
                self.showMsg(QadMsg.translate("Command_CIRCLE", "\nThe circle doesn't exist."))
          else:
@@ -852,14 +838,12 @@ class QadCIRCLECommandClass(QadCommandClass):
             circle = QadCircle().fromCenterArea(self.centerPt, self.area)
             if circle is not None:
                self.radius = circle.radius 
-               self.plugIn.setLastRadius(self.radius)     
-               points = circle.asPolyline()
-               if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer   
-                  if currLayer.geometryType() == QgsWkbTypes.LineGeometry:
-                     qad_layer.addLineToLayer(self.plugIn, currLayer, points)
-                  else:
-                     qad_layer.addPolygonToLayer(self.plugIn, currLayer, points)               
-               return True # fine comando
-
+               self.plugIn.setLastRadius(self.radius)                    
+               geom = circle.asGeom(currLayer.wkbType())
+               if geom is not None:
+                  if self.virtualCmd == False: # se si vuole veramente salvare il cerchio in un layer
+                     qad_layer.addGeomToLayer(self.plugIn, currLayer, self.mapToLayerCoordinates(currLayer, geom))
+                  return True # fine comando
+               
          self.isValidPreviousInput = False # per gestire il comando anche in macro      
          return False

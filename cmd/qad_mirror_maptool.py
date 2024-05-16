@@ -75,7 +75,7 @@ class Qad_mirror_maptool(QadGetPoint):
          # ruoto la geometria dell'entità
          qadGeom = entity.getQadGeom().copy() # la copio
          qadGeom.mirror(mirrorPt, angle)
-         self.__highlight.addGeometry(fromQadGeomToQgsGeom(qadGeom, entity.crs()), entity.layer)
+         self.__highlight.addGeometry(fromQadGeomToQgsGeom(qadGeom, entity.layer), entity.layer)
       elif entity.whatIs() == "DIMENTITY":
          newDimEntity = QadDimEntity(entity) # la copio
          # ruoto la quota

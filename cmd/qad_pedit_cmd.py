@@ -48,6 +48,8 @@ from ..qad_entity import QadEntity, QadEntitySet, QadLayerEntitySetIterator
 from ..qad_multi_geom import *
 from ..qad_geom_relations import getQadGeomClosestVertex, getQadGeomClosestPart
 from ..qad_layer import createMemoryLayer
+from ..qad_multi_geom import fromQadGeomToQgsGeom
+
 
 # Classe che gestisce il comando PEDIT
 class QadPEDITCommandClass(QadCommandClass):
@@ -233,7 +235,7 @@ class QadPEDITCommandClass(QadCommandClass):
          
          if layer.geometryType() == QgsWkbTypes.LineGeometry:
             newQadGeom = setQadGeomAt(qadGeom, self.polyline, self.atGeom, self.atSubGeom)
-            f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer.crs()))
+            f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
                
             # plugIn, layer, feature, refresh, check_validity
             if qad_layer.updateFeatureToLayer(self.plugIn, layer, f, False, False) == False:
@@ -246,7 +248,7 @@ class QadPEDITCommandClass(QadCommandClass):
                self.plugIn.addLayerToLastEditCommand("Feature edited", LineTempLayer)
                        
                # trasformo la geometria in quella dei layer temporanei
-               lineGeoms = [fromQadGeomToQgsGeom(self.polyline, LineTempLayer.crs())]
+               lineGeoms = [fromQadGeomToQgsGeom(self.polyline, LineTempLayer)]
                
                # plugIn, pointGeoms, lineGeoms, polygonGeoms, coord, refresh
                if qad_layer.addGeometriesToQADTempLayers(self.plugIn, None, lineGeoms, None, \
@@ -261,9 +263,8 @@ class QadPEDITCommandClass(QadCommandClass):
                      return
                else:
                   editedFeature = QgsFeature(f)
-                  fromQadGeomToQgsGeom(qadGeom, layer.crs())
                   # trasformo la geometria nel crs del layer
-                  editedFeature.setGeometry(fromQadGeomToQgsGeom(qadGeom, layer.crs()))
+                  editedFeature.setGeometry(fromQadGeomToQgsGeom(qadGeom, layer))
                   
                   # plugIn, layer, feature, refresh, check_validity
                   if qad_layer.updateFeatureToLayer(self.plugIn, layer, editedFeature, False, False) == False:
@@ -281,7 +282,7 @@ class QadPEDITCommandClass(QadCommandClass):
                   entity.qadGeom.setClose(toClose)
                   updFeature = QgsFeature(entity.getFeature())
                   # trasformo la geometria nel crs del layer
-                  updFeature.setGeometry(fromQadGeomToQgsGeom(entity.getQadGeom(), entity.crs()))
+                  updFeature.setGeometry(fromQadGeomToQgsGeom(entity.getQadGeom(), layerEntitySet.layer))
                   updObjects.append(updFeature)
                   
             # plugIn, layer, features, refresh, check_validity
@@ -303,7 +304,7 @@ class QadPEDITCommandClass(QadCommandClass):
          setQadGeomAt(g, self.polyline, self.atGeom, self.atSubGeom)
          f = self.entity.getFeature()
          # trasformo la geometria nel crs del layer
-         f.setGeometry(fromQadGeomToQgsGeom(g, self.entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(g, self.entity.layer))
 
          self.plugIn.beginEditCommand("Feature edited", self.entity.layer)
 
@@ -323,7 +324,7 @@ class QadPEDITCommandClass(QadCommandClass):
                   entity.qadGeom.reverse()
                   updFeature = QgsFeature(entity.getFeature())
                   # trasformo la geometria nel crs del layer
-                  updFeature.setGeometry(fromQadGeomToQgsGeom(entity.getQadGeom(), entity.crs()))
+                  updFeature.setGeometry(fromQadGeomToQgsGeom(entity.getQadGeom(), layerEntitySet.layer))
                   updObjects.append(updFeature)
 
             # plugIn, layer, features, refresh, check_validity
@@ -459,7 +460,7 @@ class QadPEDITCommandClass(QadCommandClass):
          g = self.entity.getQadGeom()
          newQadGeom = setQadGeomAt(g, fromQgsGeomToQadGeom(newFeature.geometry()), self.atGeom, self.atSubGeom)
          # trasformo la geometria nel crs del layer
-         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
          # plugIn, layer, feature, refresh, check_validity
          if qad_layer.updateFeatureToLayer(self.plugIn, layer, f, False, False) == False:
             self.plugIn.destroyEditCommand()
@@ -504,7 +505,7 @@ class QadPEDITCommandClass(QadCommandClass):
          newQadGeom = setQadGeomAt(g, self.polyline, self.atGeom, self.atSubGeom)
          f = self.entity.getFeature()
          # trasformo la geometria nel crs del layer
-         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.layer))
          
          self.plugIn.beginEditCommand("Feature edited", self.entity.layer)
 
@@ -524,7 +525,7 @@ class QadPEDITCommandClass(QadCommandClass):
                   entity.qadGeom.curve(toCurve)
                   updFeature = QgsFeature(entity.getFeature())
                   # trasformo la geometria nel crs del layer
-                  updFeature.setGeometry(fromQadGeomToQgsGeom(entity.getQadGeom(), entity.crs()))
+                  updFeature.setGeometry(fromQadGeomToQgsGeom(entity.getQadGeom(), layerEntitySet.layer))
                   updObjects.append(updFeature)
 
             # plugIn, layer, features, refresh, check_validity
@@ -547,7 +548,7 @@ class QadPEDITCommandClass(QadCommandClass):
          newQadGeom = setQadGeomAt(g, self.polyline, self.atGeom, self.atSubGeom)
          f = self.entity.getFeature()
          # trasformo la geometria nel crs del layer
-         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+         f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.layer))
          # plugIn, layer, feature, refresh, check_validity
          if qad_layer.updateFeatureToLayer(self.plugIn, self.entity.layer, f, False, False) == False:
             self.plugIn.destroyEditCommand()
@@ -564,7 +565,7 @@ class QadPEDITCommandClass(QadCommandClass):
                   entity.qadGeom.simplify(self.simplifyTolerance)
                   updFeature = QgsFeature(entity.getFeature())
                   # trasformo la geometria nel crs del layer
-                  updFeature.setGeometry(fromQadGeomToQgsGeom(entity.getQadGeom(), entity.crs()))
+                  updFeature.setGeometry(fromQadGeomToQgsGeom(entity.getQadGeom(), layerEntitySet.layer))
                   updObjects.append(updFeature)
          
             # plugIn, layer, features, refresh, check_validity
@@ -597,7 +598,7 @@ class QadPEDITCommandClass(QadCommandClass):
       newQadGeom = setQadGeomAt(g, self.polyline, self.atGeom, self.atSubGeom)
       f = self.entity.getFeature()
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
       
       self.plugIn.beginEditCommand("Feature edited", layer)
    
@@ -621,7 +622,7 @@ class QadPEDITCommandClass(QadCommandClass):
       newQadGeom = setQadGeomAt(g, self.polyline, self.atGeom, self.atSubGeom)
       f = self.entity.getFeature()
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
          
       self.plugIn.beginEditCommand("Feature edited", layer)
       
@@ -668,7 +669,7 @@ class QadPEDITCommandClass(QadCommandClass):
       newQadGeom = setQadGeomAt(g, self.polyline, self.atGeom, self.atSubGeom)
       f = self.entity.getFeature()
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
       
       layer = self.entity.layer
       self.plugIn.beginEditCommand("Feature edited", layer)
@@ -696,7 +697,7 @@ class QadPEDITCommandClass(QadCommandClass):
       newQadGeom = setQadGeomAt(g, g1, self.atGeom, self.atSubGeom)
       f = self.entity.getFeature()
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
 
       self.plugIn.beginEditCommand("Feature edited", layer)
       
@@ -708,7 +709,7 @@ class QadPEDITCommandClass(QadCommandClass):
       if g2 is not None:
          brokenFeature2 = QgsFeature(f)
          # trasformo la geometria nel crs del layer
-         brokenFeature2.setGeometry(fromQadGeomToQgsGeom(g2, self.entity.crs()))
+         brokenFeature2.setGeometry(fromQadGeomToQgsGeom(g2, layer))
          # plugIn, layer, feature, coordTransform, refresh, check_validity
          if qad_layer.addFeatureToLayer(self.plugIn, layer, brokenFeature2, None, False, False, False) == False:
             self.plugIn.destroyEditCommand()
@@ -1564,7 +1565,7 @@ class QadGRIPINSERTREMOVEVERTEXCommandClass(QadCommandClass):
       newQadGeom = setQadGeomAt(qadGeom, polyline, self.atGeom, self.atSubGeom)
       
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
       
       self.plugIn.beginEditCommand("Feature edited", layer)
    
@@ -1610,7 +1611,7 @@ class QadGRIPINSERTREMOVEVERTEXCommandClass(QadCommandClass):
       newQadGeom = setQadGeomAt(qadGeom, polyline, self.atGeom, self.atSubGeom)
       
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
       
       self.plugIn.beginEditCommand("Feature edited", layer)
 
@@ -1904,7 +1905,7 @@ class QadGRIPARCLINECONVERTCommandClass(QadCommandClass):
       g = self.entity.getQadGeom()
       newQadGeom = setQadGeomAt(g, polyline, self.atGeom, self.atSubGeom)
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
          
       self.plugIn.beginEditCommand("Feature edited", layer)
    
@@ -1947,7 +1948,7 @@ class QadGRIPARCLINECONVERTCommandClass(QadCommandClass):
       g = self.entity.getQadGeom()
       newQadGeom = setQadGeomAt(g, polyline, self.atGeom, self.atSubGeom)
       # trasformo la geometria nel crs del layer
-      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, self.entity.crs()))
+      f.setGeometry(fromQadGeomToQgsGeom(newQadGeom, layer))
 
       self.plugIn.beginEditCommand("Feature edited", layer)
    
