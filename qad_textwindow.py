@@ -334,7 +334,7 @@ class QadTextWindow(QDockWidget, Ui_QadTextWindow):
       h = rect.height()
       w = rect.width()
    
-      editHeight = self.edit.getOptimalHeight()
+      editHeight = int(self.edit.getOptimalHeight())
       if editHeight > h:
          editHeight = h
       chronologyEditHeight = h - editHeight
